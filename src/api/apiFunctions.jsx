@@ -19,7 +19,6 @@ export const signup = async (userData) => {
     try {
         console.log(userData);
         const response = await api.post('/auth/signup', userData);
-        console.log(response);
         if (response.data.status.code !== 0) {
             throw new Error(handleErrors(response.data.errorCode));
         }

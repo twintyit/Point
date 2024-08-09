@@ -12,9 +12,12 @@ const LoginPage = () => {
         e.preventDefault();
         setError(null);
         try {
-            const response = await login({ email, password });
-            console.log('Login successful:', response);
-            localStorage.setItem('token', response.token);
+            const response = await login({
+                    UserEmail: email,
+                    UserPassword: password,
+                });
+            localStorage.setItem('token', response.data);
+            localStorage.setItem('email', email);
             navigate('/'); 
         } catch (err) {
             setError(err.message);

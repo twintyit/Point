@@ -20,14 +20,12 @@ const SignupPage = () => {
         }
 
         try {
-            await signup({
+            const response = await signup({
                 UserEmail: email,
                 UserPassword: password,
                 UserConfirmPassword: confirmPassword
             });
-            // Вход после регистрации (если нужно)
-            // const response = await login({ email, password });
-            // localStorage.setItem('token', response.token);
+            localStorage.setItem('token', response.data);
             localStorage.setItem('email', email);
             navigate('/');
         } catch (err) {

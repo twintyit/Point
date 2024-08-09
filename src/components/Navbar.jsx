@@ -4,10 +4,11 @@ import './Navbar.css';
 
 const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("ok");
         const storedEmail = localStorage.getItem('email');
         if (storedEmail) {
             setIsLoggedIn(true);
@@ -15,10 +16,11 @@ const Navbar = () => {
         } else {
             setIsLoggedIn(false);
         }
-    }, []);
+    }, [location.pathname]);
 
     const handleLogout = () => {
         localStorage.removeItem('email');
+        localStorage.removeItem('token');
         setIsLoggedIn(false);
         navigate('/login');
     };
