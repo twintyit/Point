@@ -4,6 +4,9 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ProductList from './pages/ProductList';
+import ProductDetail from './pages/ProductDetail';
+
 import './App.css';
 
 function App() {
@@ -15,6 +18,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/category/:categoryId" element={<ProductList />} />
+          <Route path="/product/:productId" element={<ProductDetail />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -17,7 +17,6 @@ const handleErrors = (errorCode) => {
 
 export const signup = async (userData) => {
     try {
-        console.log(userData);
         const response = await api.post('/auth/signup', userData);
         if (response.data.status.code !== 0) {
             throw new Error(handleErrors(response.data.errorCode));
@@ -39,3 +38,43 @@ export const login = async (credentials) => {
         throw error;
     }
 };
+
+export const getAllProducts = async () => {
+    try {
+        const response = await api.get('/prod/allproducts');
+        if (response.data.status.code !== 0) {
+            throw new Error(handleErrors(response.data.errorCode));
+        }
+        return await response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getCategories = async () => {
+    try {
+        const response = await api.get('/prod/categories');
+        if (response.data.status.code !== 0) {
+            throw new Error(handleErrors(response.data.errorCode));
+        }
+        return await response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const getCategoryProducts = async (categoryId) => {
+    try {
+        const response = await api.get(`/prod/categoryproducts/${categoryId}`);
+
+        if (response.data.status.code !== 0) {
+            throw new Error(handleErrors(response.data.errorCode));
+        }
+        return await response.data;
+    } catch (error) {
+        console.error(`Ошибка при получении товаров категории ${categoryId}:`, error);
+    }
+}
+
+export const getProductDetails= async ()=>{
+    return "rrrr"
+}

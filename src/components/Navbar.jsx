@@ -8,7 +8,6 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("ok");
         const storedEmail = localStorage.getItem('email');
         if (storedEmail) {
             setIsLoggedIn(true);
@@ -28,7 +27,7 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="container">
-                <div className="navbar-brand">Shnurok</div>
+                <Link to="/" className="navbar-brand">Shnurok </Link>
                 <div className="navbar-links">
                     {isLoggedIn ? (
                         <>

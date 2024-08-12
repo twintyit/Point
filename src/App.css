@@ -1,0 +1,49 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* Добавляем отступ снизу, чтобы карточки не слипались */
+}
+
+.card-img-top {
+    object-fit: cover;
+    /* Обеспечивает правильное обрезание изображений */
+    height: 180px;
+    /* Фиксированная высота для изображений */
+}
+
+.card-body {
+    padding: 1rem;
+    /* Убедитесь, что внутренние отступы одинаковые */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Стили для кнопок */
+.btn {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    opacity: 0.8;
+}
