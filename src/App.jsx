@@ -6,7 +6,6 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProductList from './pages/ProductList';
 import ProductDetail from './pages/ProductDetail';
-
 import './App.css';
 
 function App() {

@@ -45,7 +45,7 @@ export const getAllProducts = async () => {
         if (response.data.status.code !== 0) {
             throw new Error(handleErrors(response.data.errorCode));
         }
-        return await response.data;
+        return  response.data;
     } catch (error) {
         throw error;
     }
@@ -57,7 +57,7 @@ export const getCategories = async () => {
         if (response.data.status.code !== 0) {
             throw new Error(handleErrors(response.data.errorCode));
         }
-        return await response.data;
+        return  response.data;
     } catch (error) {
         throw error;
     }
@@ -69,7 +69,7 @@ export const getCategoryProducts = async (categoryId) => {
         if (response.data.status.code !== 0) {
             throw new Error(handleErrors(response.data.errorCode));
         }
-        return await response.data;
+        return response.data;
     } catch (error) {
         console.error(`Ошибка при получении товаров категории ${categoryId}:`, error);
     }
@@ -77,4 +77,19 @@ export const getCategoryProducts = async (categoryId) => {
 
 export const getProductDetails= async ()=>{
     return "rrrr"
+}
+
+export const getSaleImages = async () => {
+
+    try {
+        const response = await api.get(`/prod/carousel`);
+        console.log(response);
+        
+        if (response.data.status.code !== 0) {
+            throw new Error(handleErrors(response.data.errorCode));
+        }
+        return  response.data;
+    } catch (error) {
+        console.error( error);
+    }
 }

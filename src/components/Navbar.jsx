@@ -27,12 +27,15 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="container">
-                <Link to="/" className="navbar-brand">Shnurok </Link>
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4063/4063742.png" alt="Logo" className="navbar-icon" />
+                <Link to="/" className="navbar-brand text-light">Shnurok </Link>
+                </div>
                 <div className="navbar-links">
                     {isLoggedIn ? (
                         <>
-                            <span className="navbar-text">Hello, {email}</span>
-                            <button className="btn btn-secondary" onClick={handleLogout}>Logout</button>
+                            <span className="navbar-text text-light">Hello, {email}</span>
+                            <button className="btn btn-secondary " onClick={handleLogout}>Logout</button>
                         </>
                     ) : (
                         <>

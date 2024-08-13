@@ -1,12 +1,14 @@
 .navbar {
-    background-color: #f8f9fa;
+    background-color: #484848;
     padding: 1rem;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #d8d8d8;
+    color: white;
 }
 
 .navbar-brand {
     font-size: 1.5rem;
     font-weight: bold;
+    color: white;
 }
 
 .navbar-links {
@@ -17,6 +19,7 @@
 
 .navbar-text {
     font-size: 1rem;
+   
 }
 
 .btn {
@@ -37,4 +40,11 @@
 
 .btn-secondary:hover {
     background-color: #5a6268;
+}
+
+.navbar-icon {
+    width: 35px;
+    height: auto;
+    margin-bottom: 5px;
+    margin-right: 8px;
 }

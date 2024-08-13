@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import './ProductCard.css';
 
 const ProductCard = ({ product, onAddToCart }) => {
     return (
@@ -15,9 +16,6 @@ const ProductCard = ({ product, onAddToCart }) => {
                     Скидка: {product.discount}%
                 </Card.Text>
                 <div className="d-flex justify-content-between">
-                    <Button variant="primary" as={Link} to={`/product/${product.productId}`}>
-                        Подробнее
-                    </Button>
                     <Button variant="success" onClick={() => onAddToCart(product)}>
                         Добавить в корзину
                     </Button>
