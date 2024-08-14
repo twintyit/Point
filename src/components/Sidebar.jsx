@@ -23,8 +23,11 @@ const Sidebar = () => {
         <div className="sidebar">
             <ul className="list-unstyled">
                 {categories.map(category => (
-                    <li key={category.categoryId}>
-                        <Link to={`/category/${category.categoryId}`}>{category.name}</Link>
+                    <li key={category.categoryId} className=''> 
+                        <Link to={`/category/${category.categoryId}`} className='d-flex align-items-center'>
+                            <img src='https://cdn-icons-png.flaticon.com/512/3659/3659952.png' className='icon-category'></img>
+                            <span>{category.name}</span>
+                        </Link>
                     </li>
                 ))}
             </ul>

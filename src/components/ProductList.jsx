@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCategoryProducts } from '../api/apiFunctions.jsx';
-import ProductCard from '../components/ProductCard';
+import { getCategoryProducts, getAllProducts } from '../api/apiFunctions.jsx';
+import ProductCard from './ProductCard.jsx';
 
-const ProductList = () => {
-    const { categoryId } = useParams();
+const ProductList = ({ categoryId }) => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await getCategoryProducts(categoryId);
+                let response;
+                console.log(categoryId)
+                if (categoryId) {
+                    response = await getCategoryProducts(categoryId);
+                } else {
+                    response = await getAllProducts();
+                }
                 setProducts(response.data);
             } catch (error) {
                 console.error(`Ошибка при получении товаров категории ${categoryId}:`, error);
@@ -30,7 +35,7 @@ const ProductList = () => {
         <div className="container">
             <div className="row">
                 {products.map(product => (
-                    <div className="col-md-4 mb-4" key={product.productId}> {/* Удаляем отступы и добавляем отступ снизу */}
+                    <div className="col-md-3 mb-4" key={product.productId}>
                         <ProductCard
                             product={product}
                             onAddToCart={handleAddToCart}
