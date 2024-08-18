@@ -32,3 +32,14 @@ export const getCategoryName = async (categoryId) => {
     return makeRequest('get', `/prod/categories/${categoryId}`);
 };
 
+export const getIcons = () => {
+    const data = {
+        account: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFjcl26tM8ihvF27Mt0RTf-X2tnHzDAhO2Q&s',
+        basket: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTERVL3Yb4wldHeIS2iN3v9CBotZG5c-jPReA&s',
+    }
+    return data;
+};
+
+export const SearchProduct = (title)=>{
+    return title;
+}

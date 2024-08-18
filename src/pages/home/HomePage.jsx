@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Slidebar from '../components/Sidebar'
-import Carousel from '../components/Carousel';
-import ProductList from '../components/ProductList';
+import Slidebar from '../../components/navigation/slidebar/Sidebar'
+import Carousel from '../../components/carousel/Carousel';
+import ProductList from '../../components/ProductList';
 import './HomePage.css';
 
 const HomePage = () => {

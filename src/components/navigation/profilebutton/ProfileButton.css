@@ -1,0 +1,45 @@
+/* components/ProfileButton.css */
+.profile-button {
+    background: transparent;
+    /* Убираем фоновый цвет */
+    border: none;
+    /* Убираем обводку */
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 25px;
+    /* Ширина иконки */
+    height: 25px;
+    /* Высота иконки */
+    object-fit: cover;
+    /* Убираем любые искажения иконки */
+    color: #fff;
+    padding: 5px;
+}
+
+.profile-icon:hover{
+    background-color: #767676;
+}
+
+
+.dropdown-toggle::after {
+    display: none !important;
+    /* Скрываем стрелку вниз */
+}
+
+.dropdown-menu {
+    min-width: 160px;
+    /* Ширина выпадающего меню */
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    /* Цвет фона элемента при наведении */
+}

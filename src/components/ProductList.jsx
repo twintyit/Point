@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCategoryProducts, getAllProducts } from '../api/apiFunctions.jsx';
-import ProductCard from './ProductCard.jsx';
+import ProductCard from './productCard/ProductCard.jsx';
 
 const ProductList = ({ categoryId }) => {
     const [products, setProducts] = useState([]);

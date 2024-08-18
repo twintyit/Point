@@ -1,0 +1,42 @@
+/* Modal.css */
+
+.modal-dialog {
+    transition: transform 0.3s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+    /* Центрирование по высоте */
+}
+
+.modal-dialog.modal-show {
+    transform: scale(1);
+}
+
+.modal-dialog.modal-hide {
+    transform: scale(0.9);
+}
+
+.modal-content {
+    position: relative;
+    /* Необходимо для позиционирования кнопки закрытия */
+    border-radius: 0.5rem;
+    /* Скругление углов */
+    max-height: 80vh;
+    /* Ограничение высоты модального окна */
+    overflow-y: auto;
+    /* Добавление прокрутки, если содержимое превышает высоту */
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem; /* Немного отступаем от верхнего края */
+    right: 1rem; /* Немного отступаем от правого края */
+    padding: 0.5rem;
+    border: none;
+    background: transparent;
+    color: #000; /* Цвет крестика */
+    font-size: 1.5rem; /* Размер шрифта крестика */
+    cursor: pointer;
+    z-index: 1050; /* Обеспечиваем, что кнопка находится поверх других элементов */
+}

@@ -1,0 +1,26 @@
+.cart-button {
+    background: transparent;
+    /* Прозрачный фон кнопки */
+    border: none;
+    /* Убираем обводку */
+  
+    /* Скругляем кнопку */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* Указываем, что элемент кликабельный */
+}
+
+.cart-icon {
+    width: 25px;        
+    height: 25px;
+    object-fit: cover;
+    color: #fff;
+    padding: 3px;
+}
+
+.cart-button:hover {
+    background: #767676;
+    /* Цвет иконки при наведении */
+}

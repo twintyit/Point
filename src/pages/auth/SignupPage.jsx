@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signup } from '../api/apiFunctions';
+import { signup } from '../../api/apiFunctions';
 
 const SignupPage = () => {
     const [email, setEmail] = useState('');

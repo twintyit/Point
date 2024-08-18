@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Modal from '../../modal/Modal';
+import SearchBar from '../searchbar/SearchBar';
+import LoginPage from '../../../pages/auth/LoginPage';
+import { getIcons } from '../../../api/apiFunctions';
+import ProfileButton from '../profilebutton/ProfileButton';
+import CartButton from '../../cartbutton/CartButton';
 import './Navbar.css';
 
 const Navbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [email, setEmail] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [icons, setIcons] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,14 +24,28 @@ const Navbar = () => {
         } else {
             setIsLoggedIn(false);
         }
-    }, [location.pathname]);
+        const response = getIcons();
+        setIcons(response);
+    }, [isLoggedIn]);
 
     const handleLogout = () => {
         localStorage.removeItem('email');
         localStorage.removeItem('token');
         setIsLoggedIn(false);
-        navigate('/login');
+        navigate('/');
     };
+
+    const openModal = () => setIsModalVisible(true);
+    const closeModal = () => setIsModalVisible(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, []);
 
     return (
         <nav className="navbar">
@@ -31,7 +54,9 @@ const Navbar = () => {
                     <img src="https://cdn-icons-png.flaticon.com/512/4063/4063742.png" alt="Logo" className="navbar-icon" />
                 <Link to="/" className="navbar-brand text-light">Shnurok </Link>
                 </div>
+                <SearchBar />
                 <div className="navbar-links">
+                    
                     {isLoggedIn ? (
                         <>
                             <span className="navbar-text text-light">Hello, {email}</span>
@@ -39,12 +64,15 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            <Link to="/login" className="btn btn-primary">Login</Link>
-                            <Link to="/signup" className="btn btn-secondary">Signup</Link>
+                                <ProfileButton iconUrl={icons.account} openModal= {openModal}></ProfileButton>
                         </>
                     )}
+                    <CartButton></CartButton>
                 </div>
             </div>
+            <Modal isVisible={isModalVisible} onClose={closeModal}>
+                <LoginPage closeModal={closeModal} setIsLoggedIn={setIsLoggedIn} />
+            </Modal>
         </nav>
     );
 };

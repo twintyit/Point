@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductDetails } from '../api/apiFunctions';
+import { getProductDetails } from '../../api/apiFunctions';
 import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
+import './ProductDetail.css'
 
 const ProductDetail = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(json => console.log(json))
         const fetchProductDetails = async () => {
             try {
                 const response = await getProductDetails(productId);
@@ -25,15 +29,13 @@ const ProductDetail = () => {
     return (
         <Container className="my-4">
             <Row>
-                <Col md={4} className="d-flex justify-content-center align-items-center">
-                    
-                        <img variant="top" src={product.images[0]} width={800} height={700} className="product-img" />
-                    
+                <Col md={4} className=" image-container">
+                    <img src={product.images[0]} className="product-img" />
                 </Col>
                 <Col md={8}>
                     <Card className="product-info">
                         <Card.Body>
-                            <Card.Title>{product.name}</Card.Title>
+                            <h2>{product.name}</h2>
                             <Card.Subtitle className="mb-2 text-muted">{product.price} ₴</Card.Subtitle>
                             <Card.Text>{product.description}</Card.Text>
                             <Button variant="primary">Добавить в корзину</Button>

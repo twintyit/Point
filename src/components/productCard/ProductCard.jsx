@@ -17,7 +17,10 @@ const ProductCard = ({ product, onAddToCart }) => {
                         Скидка: {product.discount}%
                     </Card.Text>
                     <div className="d-flex justify-content-between">
-                        <Button variant="success" onClick={() => onAddToCart(product)}>
+                        <Button variant="success" onClick={(e) => {
+                            e.preventDefault(); 
+                            onAddToCart(product); 
+                        }}>
                             Добавить в корзину
                         </Button>
                     </div>

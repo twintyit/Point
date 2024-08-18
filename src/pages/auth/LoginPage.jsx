@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../api/apiFunctions';
+import { login } from '../../api/apiFunctions';
 
-const LoginPage = () => {
+const LoginPage = ({ closeModal, setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -18,7 +18,9 @@ const LoginPage = () => {
                 });
             localStorage.setItem('token', response.data);
             localStorage.setItem('email', email);
+            setIsLoggedIn(true);
             navigate('/'); 
+            closeModal();
         } catch (err) {
             setError(err.message);
         }
@@ -26,7 +28,7 @@ const LoginPage = () => {
 
     return (
         <div className="container">
-            <h1>Login</h1>
+            <h3>Login</h3>
             <form onSubmit={handleLogin}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email</label>
