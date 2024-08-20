@@ -13,7 +13,7 @@ const Modal = ({ isVisible, onClose, children }) => {
         setShow(false);
         setTimeout(() => {
             onClose();
-        }, 300); // Должен совпадать с длительностью анимации
+        }, 300); 
     };
 
     return (

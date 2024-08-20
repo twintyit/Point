@@ -1,0 +1,8 @@
+.icon-buttons {
+    display: flex;
+    gap: 15px;
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}

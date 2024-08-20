@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/apiFunctions';
+import { Link } from 'react-router-dom';
 
 const LoginPage = ({ closeModal, setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
@@ -52,9 +53,14 @@ const LoginPage = ({ closeModal, setIsLoggedIn }) => {
                     />
                     {error && error.includes('Password') && <div className="invalid-feedback">{error}</div>}
                 </div>
-                <button type="submit" className="btn btn-primary">Log In</button>
-                {error && !error.includes('Email') && !error.includes('Password') && <p className="text-danger mt-3">{error}</p>}
+            
+                    <button type="submit" className="btn btn-primary">Log In</button>
+                    {error && !error.includes('Email') && !error.includes('Password') && <p className="text-danger mt-3">{error}</p>}
+                    <p className="mt-3">
+                        Нет аккаунта? <Link to="/signup" onClick={closeModal}>Зарегистрироваться</Link>
+                    </p>
             </form>
+           
         </div>
     );
 };

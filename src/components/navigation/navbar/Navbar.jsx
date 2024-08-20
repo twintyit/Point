@@ -4,8 +4,7 @@ import Modal from '../../modal/Modal';
 import SearchBar from '../searchbar/SearchBar';
 import LoginPage from '../../../pages/auth/LoginPage';
 import { getIcons } from '../../../api/apiFunctions';
-import ProfileButton from '../profilebutton/ProfileButton';
-import CartButton from '../../cartbutton/CartButton';
+import IconButtons from '../navbarbuttons/IconButtons';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -15,6 +14,15 @@ const Navbar = () => {
     const [icons, setIcons] = useState([]);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, []);
 
     useEffect(() => {
         const storedEmail = localStorage.getItem('email');
@@ -38,36 +46,23 @@ const Navbar = () => {
     const openModal = () => setIsModalVisible(true);
     const closeModal = () => setIsModalVisible(false);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsLoggedIn(true);
-        } else {
-            setIsLoggedIn(false);
-        }
-    }, []);
+    const handleCart = () => {
+        alert("Comming soon...")
+    };
+    const handleViewOrders = () => {
+        alert("Comming soon...")
+    };
 
     return (
         <nav className="navbar">
             <div className="container">
                 <div>
-                    <img src="https://cdn-icons-png.flaticon.com/512/4063/4063742.png" alt="Logo" className="navbar-icon" />
-                <Link to="/" className="navbar-brand text-light">Shnurok </Link>
+                    
+                    <Link to="/" className="navbar-brand text-light"><img src="https://cdn-icons-png.flaticon.com/512/4063/4063742.png" alt="Logo" className="navbar-icon" />Shnurok </Link>
                 </div>
                 <SearchBar />
                 <div className="navbar-links">
-                    
-                    {isLoggedIn ? (
-                        <>
-                            <span className="navbar-text text-light">Hello, {email}</span>
-                            <button className="btn btn-secondary " onClick={handleLogout}>Logout</button>
-                        </>
-                    ) : (
-                        <>
-                                <ProfileButton iconUrl={icons.account} openModal= {openModal}></ProfileButton>
-                        </>
-                    )}
-                    <CartButton></CartButton>
+                    <IconButtons isLoggedIn={isLoggedIn} onProfileClick={openModal} logout={handleLogout} onCartClick={handleCart} viewOrders={handleViewOrders}></IconButtons>
                 </div>
             </div>
             <Modal isVisible={isModalVisible} onClose={closeModal}>

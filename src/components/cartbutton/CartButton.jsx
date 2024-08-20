@@ -1,9 +1,7 @@
-// components/CartButton.js
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBasketShopping } from '@fortawesome/free-solid-svg-icons'; // Импортируем иконку корзины
-import './CartButton.css'; // Импортируем стили
-import { Button } from 'react-bootstrap';
+import { faBasketShopping } from '@fortawesome/free-solid-svg-icons';
+import './CartButton.css';
 
 const CartButton = () => {
     const handleClick = () => {
@@ -11,7 +9,7 @@ const CartButton = () => {
     };
 
     return (
-        <button className="cart-button" onClick={handleClick}>
+        <button className="icon-button" onClick={handleClick}>
             <FontAwesomeIcon icon={faBasketShopping} className="cart-icon" />
         </button>
     );
