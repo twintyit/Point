@@ -11,7 +11,6 @@ const ProductList = ({ categoryId }) => {
         const fetchProducts = async () => {
             try {
                 let response;
-                console.log(categoryId)
                 if (categoryId) {
                     response = await getCategoryProducts(categoryId);
                 } else {
@@ -35,7 +34,7 @@ const ProductList = ({ categoryId }) => {
         <div className="container">
             <div className="row">
                 {products.map(product => (
-                    <div className="col-md-3 mb-4" key={product.productId}>
+                    <div className="col-md-3 mb-4" key={product.id}>
                         <ProductCard
                             product={product}
                             onAddToCart={handleAddToCart}

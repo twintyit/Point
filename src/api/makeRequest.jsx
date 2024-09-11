@@ -16,9 +16,19 @@ const handleErrors = (errorCode) => {
 };
 
 
-export const makeRequest = async (method, url, data = null) => {
+export const makeRequest = async (method, url, data = null, token = null) => {
     try {
-        const response = await api[method](url, data);
+
+        const config = {
+            headers: {}
+        };
+
+
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await api[method](url, data, config);
         if (response.data.status.code !== 0) {
             throw new Error(handleErrors(response.data.errorCode));
         }

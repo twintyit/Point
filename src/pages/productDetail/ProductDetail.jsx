@@ -9,9 +9,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(res => res.json())
-            .then(json => console.log(json))
+
         const fetchProductDetails = async () => {
             try {
                 const response = await getProductDetails(productId);

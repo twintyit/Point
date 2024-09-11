@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './ProductCard.css';
 
 const ProductCard = ({ product, onAddToCart }) => {
+
     return (
-        <Link to={`/product/${product.productId}`} className="text-decoration-none">
+        <Link to={`/product/${product.id}`} className="text-decoration-none">
             <Card className="product-card">
                 <Card.Img variant="top" src={product.images[0]} className="card-img-top" />
                 <Card.Body>

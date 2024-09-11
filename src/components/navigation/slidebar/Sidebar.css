@@ -1,18 +1,7 @@
-.sidebar {
-    width: 300px;
-    position: relative;
-    top: -24px;
-    bottom: 0;
-    padding-top: 1rem;
-    border-right: 1px solid #ddd;
-    height: 100%;
-    overflow-y: auto;
-    z-index: 1000;
-}
-
 .sidebar ul {
     padding-left: 0;
     list-style: none;
+    padding-top: 10px;
 }
 
 .sidebar li {
@@ -20,10 +9,24 @@
     font-size: 14px;
 }
 
+.sidebar {
+    width: 250px;
+    box-shadow: 1px 0 0px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 .sidebar li a {
-    color: #333;
+    color: #3f3f3f;
     text-decoration: none;
-    display: block;
+    transition: color 0.3s ease;
+    cursor: pointer;
 }
 
 .sidebar li a:hover {
@@ -34,3 +37,7 @@
    width: 20px;
    margin: 0px 10px;
 }
+
+.sidebar-hidden {
+    display: none;
+} 
