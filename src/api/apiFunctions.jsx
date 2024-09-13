@@ -1,23 +1,23 @@
 import {makeRequest} from './makeRequest';
 
 export const signup = async (userData) => {
-    return makeRequest('post', '/auth/signup', userData);
+    return await makeRequest('post', '/auth/signup', userData);
 };
 
 export const login = async (credentials) => {
-    return makeRequest('post', '/auth/login', credentials);
+    return await makeRequest('post', '/auth/login', credentials);
 };
 
 export const getAllProducts = async () => {
-    return makeRequest('get', '/prod/allproducts');
+    return await makeRequest('get', '/prod/allproducts');
 };
 
 export const getCategories = async () => {
-    return makeRequest('get', '/prod/categories');
+    return await makeRequest('get', '/prod/categories');
 };
 
 export const getCategoryProducts = async (categoryId) => {
-    return makeRequest('get', `/prod/categoryproducts/${categoryId}`);
+    return await makeRequest('get', `/prod/categoryproducts/${categoryId}`);
 };
 
 export const getProductDetails = async (productId) => {
@@ -25,15 +25,15 @@ export const getProductDetails = async (productId) => {
 };
 
 export const getSaleImages = async () => {
-    return makeRequest('get', '/prod/carousel');
+    return await makeRequest('get', '/prod/carousel');
 };
 
 export const getCategoryName = async (categoryId) => {
-    return makeRequest('get', `/prod/categories/${categoryId}`);
+    return await makeRequest('get', `/prod/categories/${categoryId}`);
 };
 
 export const logout = async(token)=>{
-    return makeRequest('post', `/auth/logout`, null, token);
+    return  await makeRequest('post', `/auth/logout`, null, token);
 }
 
 export const getIcons = () => {
@@ -42,6 +42,14 @@ export const getIcons = () => {
         basket: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTERVL3Yb4wldHeIS2iN3v9CBotZG5c-jPReA&s',
     }
     return data;
+};
+
+export const saveCart = async (token) => {
+    try {
+        return await makeRequest('post', '/cart/save', cart, token);
+    } catch (error) {
+        console.error('Ошибка сохранения корзины:', error);
+    }
 };
 
 export const SearchProduct = (title)=>{

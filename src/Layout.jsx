@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Navbar from './components/navigation/navbar/Navbar';
 import Sidebar from './components/navigation/slidebar/Sidebar';
 import Footer from './components/navigation/footer/Footer';
-import { useModal } from './components/modal/ModalContext';
+import { useModal } from './contexts/ModalContext';
 import Modal from './components/modal/Modal';
 import './Layout.css';
 
@@ -16,16 +16,13 @@ const Layout = ({ children }) => {
 
     useEffect(() => {
         if (location.pathname === '/') {
-            console.log('1')
             setSidebarContent('categories');
             setIsSidebarVisible(true);
            
         } else if (location.pathname.startsWith('/cabinet')) {
-            console.log('2')
             setSidebarContent('cabinet');
             setIsSidebarVisible(true);
         } else {
-            console.log('3')
             setIsSidebarVisible(false);
         }
     }, [location.pathname]);

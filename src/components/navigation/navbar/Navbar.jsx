@@ -5,7 +5,7 @@ import LoginPage from '../../../pages/auth/LoginPage';
 import { getIcons, logout } from '../../../api/apiFunctions';
 import IconButtons from '../navbarbuttons/IconButtons';
 import UserCart from '../../../pages/auth/usercart/UserCart';
-import { useModal } from '../../modal/ModalContext';
+import { useModal } from '../../../contexts/ModalContext';
 import './Navbar.css';
 
 const Navbar = () => {

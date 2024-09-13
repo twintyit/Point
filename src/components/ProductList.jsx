@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { getCategoryProducts, getAllProducts } from '../api/apiFunctions.jsx';
 import ProductCard from './productCard/ProductCard.jsx';
+import { useCart } from '../contexts/CartContext.jsx';
 
 const ProductList = ({ categoryId }) => {
+
+    const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
@@ -13,6 +15,7 @@ const ProductList = ({ categoryId }) => {
                 let response;
                 if (categoryId) {
                     response = await getCategoryProducts(categoryId);
+                    console.log(response);
                 } else {
                     response = await getAllProducts();
                 }
@@ -26,8 +29,7 @@ const ProductList = ({ categoryId }) => {
     }, [categoryId]);
 
     const handleAddToCart = (product) => {
-        // setCart([...cart, product]);
-        alert(`comming soon...`);
+        addToCart(product);
     };
 
     return (

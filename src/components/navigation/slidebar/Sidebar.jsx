@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories } from '../../../api/apiFunctions';
 import SidebarCabinetButton from './sidebarCabinetButton/SidebarCabinetButton';
-import { useModal } from '../../modal/ModalContext';
+import { useModal } from '../../../contexts/ModalContext';
 import UserCart from '../../../pages/auth/usercart/UserCart';
 
 import './Sidebar.css';
@@ -17,7 +17,6 @@ const Sidebar = ({ mode, isVisible }) => {
     ]
 
     useEffect(() => {
-        console.log(mode)
         if (mode === 'cabinet') {
             setContent(cabinet);
         }

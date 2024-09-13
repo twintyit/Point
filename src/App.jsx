@@ -10,7 +10,8 @@ import Cabinet from './pages/auth/cabinet/Cabinet';
 import Layout from './Layout';
 import UserOrders from './pages/auth/userorders/UserOrders';
 import UserAccount from './pages/auth/useraccount/UserAccount';
-import { ModalProvider } from './components/modal/ModalContext';
+import { ModalProvider } from './contexts/ModalContext';
+import { CartProvider } from './contexts/CartContext';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
   
   return (
     <ModalProvider>
+      <CartProvider>
       <BrowserRouter>
         <Layout>    
           <Routes>
@@ -34,6 +36,7 @@ function App() {
           </Routes>
         </Layout>
       </BrowserRouter>
+      </CartProvider>
     </ModalProvider>
   );
 }
