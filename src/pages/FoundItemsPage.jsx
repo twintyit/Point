@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import ProductList from '../components/ProductList';
 import { useParams } from 'react-router-dom';
-import { SearchProduct } from '../api/apiFunctions';
+import { CloseButton } from 'react-bootstrap';
 
 const FoundItemsPage = () => {
 
-    const [items, setItems] = useState(null);
-    const {text} = useParams();
-
-    useEffect(() => {
-       console.log(text);
-            const response = SearchProduct(text);
-            setItems(response);
-        
-    }, []);
-
+    const { text } = useParams();
 
     return (
         <>
         <div>
-                <h3>Cкоро Стас сделает поиск и вы найдете {items}</h3>
+                <h4 style={{fontWeight: 700}}>Результаты поиска <span style={{ color: 'blue' }}>"{text}"</span></h4>
+                <ProductList searchProduct={text}></ProductList>
         </div>
         </>
     );

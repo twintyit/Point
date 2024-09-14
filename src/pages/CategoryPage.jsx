@@ -28,7 +28,6 @@ const CategoryPage = () => {
         <div className="container">
             {/* <Breadcrumbs /> */}
             <h3>{categoryName}</h3>
-            <p>{products.length} товаров найдено</p>
             <ProductList categoryId={categoryId} />
         </div>
     );

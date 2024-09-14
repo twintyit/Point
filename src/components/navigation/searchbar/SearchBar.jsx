@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import './SearchBar.css';
 import { useNavigate } from 'react-router-dom';
-import { redirect } from 'react-router-dom';
+import { SearchProduct } from '../../../api/apiFunctions';
 
 const SEARCH_COOKIE_NAME = 'searchHistory';
 
@@ -38,6 +38,7 @@ const SearchBar = () => {
         event.preventDefault();
 
         if (searchTerm !== '') {
+
             const newHistory = [searchTerm, ...searchHistory];
             setSearchHistory(newHistory);
 

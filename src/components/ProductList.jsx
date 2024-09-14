@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { getCategoryProducts, getAllProducts } from '../api/apiFunctions.jsx';
 import ProductCard from './productCard/ProductCard.jsx';
 import { useCart } from '../contexts/CartContext.jsx';
+import { SearchProduct } from '../api/apiFunctions';
 
-const ProductList = ({ categoryId }) => {
+const ProductList = ({ categoryId, searchProduct }) => {
 
     const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
@@ -15,8 +16,11 @@ const ProductList = ({ categoryId }) => {
                 let response;
                 if (categoryId) {
                     response = await getCategoryProducts(categoryId);
+                } else if (searchProduct){
+                    response = await SearchProduct(searchProduct);
                     console.log(response);
-                } else {
+                } 
+                else {
                     response = await getAllProducts();
                 }
                 setProducts(response.data);
@@ -35,6 +39,7 @@ const ProductList = ({ categoryId }) => {
     return (
         <div className="container">
             <div className="row">
+                <p>{products.length} товаров найдено</p>
                 {products.map(product => (
                     <div className="col-md-3 mb-4" key={product.id}>
                         <ProductCard

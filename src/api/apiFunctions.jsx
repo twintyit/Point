@@ -52,6 +52,6 @@ export const saveCart = async (token) => {
     }
 };
 
-export const SearchProduct = (title)=>{
-    return title;
+export const SearchProduct = async (title)=>{
+    return await makeRequest('get', `/prod/search?query=${title}`);
 }
