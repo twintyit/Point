@@ -3,8 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: calc(100% - 60rem);
     min-height: calc(100% - 1rem);
-    /* Центрирование по высоте */
 }
 
 .modal-dialog.modal-show {
@@ -17,24 +17,21 @@
 
 .modal-content {
     position: relative;
-    /* Необходимо для позиционирования кнопки закрытия */
     border-radius: 0.5rem;
-    /* Скругление углов */
     max-height: 80vh;
-    /* Ограничение высоты модального окна */
     overflow-y: auto;
-    /* Добавление прокрутки, если содержимое превышает высоту */
 }
+
 
 .close-btn {
     position: absolute;
     top: 1rem; 
-    right: 1rem; /* Немного отступаем от правого края */
+    right: 1rem;
     padding: 0.5rem;
     border: none;
     background: transparent;
-    color: #000; /* Цвет крестика */
-    font-size: 1.5rem; /* Размер шрифта крестика */
+    color: #000;
+    font-size: 1.5rem; 
     cursor: pointer;
-    z-index: 1050; /* Обеспечиваем, что кнопка находится поверх других элементов */
+    z-index: 1050; 
 }

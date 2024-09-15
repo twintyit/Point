@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faBasketShopping } from '@fortawesome/free-solid-svg-icons';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-
+import {useCart } from '../../../contexts/CartContext.jsx'
 import IconButton from './IconButton';
 import './IconButtons.css';
 
 const IconButtons = ({ isLoggedIn, onProfileClick, onCartClick, viewOrders, logout }) => {
+
+    const { getCount, cart } = useCart();
+    const [count, setCount] = useState(0);
+
+    useEffect(()=>{
+        setCount(getCount());
+    }, [cart])
+
     return (
         <div className="icon-buttons">
             {isLoggedIn ? (
                 <>
                     <IconButton icon={faList} onClick={viewOrders} />
-                    <IconButton icon={faBasketShopping} onClick={onCartClick} />
+                    <IconButton icon={faBasketShopping} onClick={onCartClick} totalItems={count} />
                     <IconButton icon={faRightFromBracket} onClick={logout} />
                 </>
             ) : (
                 <>
                     <IconButton icon={faUser} onClick={onProfileClick} />
-                    <IconButton icon={faBasketShopping} onClick={onCartClick} />
+                        <IconButton icon={faBasketShopping} onClick={onCartClick} totalItems={count}  />
                 </>
             )}
         </div>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import './SearchBar.css';
 import { useNavigate } from 'react-router-dom';
-import { SearchProduct } from '../../../api/apiFunctions';
+import './SearchBar.css';
 
 const SEARCH_COOKIE_NAME = 'searchHistory';
 

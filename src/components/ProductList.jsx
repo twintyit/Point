@@ -18,7 +18,6 @@ const ProductList = ({ categoryId, searchProduct }) => {
                     response = await getCategoryProducts(categoryId);
                 } else if (searchProduct){
                     response = await SearchProduct(searchProduct);
-                    console.log(response);
                 } 
                 else {
                     response = await getAllProducts();
@@ -30,7 +29,7 @@ const ProductList = ({ categoryId, searchProduct }) => {
         };
 
         fetchProducts();
-    }, [categoryId]);
+    }, [categoryId, searchProduct]);
 
     const handleAddToCart = (product) => {
         addToCart(product);

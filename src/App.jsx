@@ -12,6 +12,7 @@ import UserOrders from './pages/auth/userorders/UserOrders';
 import UserAccount from './pages/auth/useraccount/UserAccount';
 import { ModalProvider } from './contexts/ModalContext';
 import { CartProvider } from './contexts/CartContext';
+import CheckoutPage from './pages/checkout/CheckoutPage';
 
 import './App.css';
 
@@ -32,7 +33,7 @@ function App() {
             <Route path="/cabinet" element={<Cabinet />} />
             <Route path="/cabinet/orders" element={<UserOrders />} />
             <Route path="/cabinet/account" element={<UserAccount />} />
-
+              <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>
