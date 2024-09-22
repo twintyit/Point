@@ -39,7 +39,7 @@ export const CartProvider = ({ children }) => {
             }
         }
         fetchCart();
-    }, [cart]);
+    }, []);
 
     const addToCart = async (item) => {
         if (isAuthenticated) {
@@ -108,7 +108,13 @@ export const CartProvider = ({ children }) => {
     const deleteFromCart = async (id) => {
         if (isAuthenticated) {
             const token = getToken();
-            await deleteItemFromCart(id, token);
+            const res1 = await deleteItemFromCart(id, token);
+            if (res1.status.code === 0) {
+                const res2 = await getCart(token);
+                if (res2.status.code === 0) {
+                    setCart(res2.data.items);
+                }
+            }
         } else {
             setCart((prevCart) => {
                 return prevCart.filter((cartItem) => cartItem.product.id !== id);
