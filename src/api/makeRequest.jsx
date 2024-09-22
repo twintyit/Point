@@ -18,18 +18,21 @@ const handleErrors = (errorCode) => {
 
 export const makeRequest = async (method, url, data = null, token = null) => {
     try {
-
         const config = {
-            headers: {}
+            headers: {
+                'Content-Type': 'application/json', 
+            },
         };
 
-
         if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`;
+            config.headers['Authorization'] = token;
         }
 
-        const response = await api[method](url, data, config);
-        if (response.data.status.code !== 0) {
+        const response = method === 'get'
+            ? await api[method](url, config)
+            : await api[method](url, data, config);
+
+        if (response.data.status && response.data.status.code !== 0) {
             throw new Error(handleErrors(response.data.errorCode));
         }
         return response.data;

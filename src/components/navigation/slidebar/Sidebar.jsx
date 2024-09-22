@@ -22,22 +22,14 @@ const Sidebar = ({ mode, isVisible }) => {
         }
         else if(mode === 'categories'){
             const fetchCategories = async () => {
-                try {
-                    const data = await getCategories();
-                    setContent(data.data);
-                } catch (error) {
-                    console.error('Ошибка при получении категорий:', error);
-                }
+                const data = await getCategories();
+                setContent(data.data);
             };
 
             fetchCategories();
         }
     }, [mode]);
-
-    const handleCartClick = () => {
-        openModal(<UserCart></UserCart>); 
-    };
-
+    
     return (
         <div className= {`sidebar ${!isVisible ? 'sidebar-hidden' : ''}`}>
             {mode === 'cabinet' ? (
@@ -50,7 +42,7 @@ const Sidebar = ({ mode, isVisible }) => {
                 {content.map(item => (
                     <li key={item.id} className='list-item'>
                         {item.name === 'Cart' ? (
-                            <a onClick={handleCartClick} className='d-flex align-items-center'>
+                            <a onClick={() => openModal(<UserCart></UserCart>)} className='d-flex align-items-center'>
                                 <span className='material-icons icon-category'>shopping_cart</span>
                                 <span>Cart</span>
                             </a>

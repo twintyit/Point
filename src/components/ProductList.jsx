@@ -8,7 +8,7 @@ const ProductList = ({ categoryId, searchProduct }) => {
 
     const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+ 
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -42,7 +42,7 @@ const ProductList = ({ categoryId, searchProduct }) => {
                 {products.map(product => (
                     <div className="col-md-3 mb-4" key={product.id}>
                         <ProductCard
-                            product={product}
+                            product={ {product: product, quantity: 1} }
                             onAddToCart={handleAddToCart}
                         />
                     </div>

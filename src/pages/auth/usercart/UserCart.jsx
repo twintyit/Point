@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCart } from '../../../contexts/CartContext';
 import { useModal } from '../../../contexts/ModalContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import QuantityControl from '../../../components/quantityControl/QuantityControl';
@@ -8,30 +9,20 @@ import './UserCart.css';
 
 const UserCart = () => {
     const { closeModal } = useModal();
-    const { cart, removeFromCart } = useCart();
-    const [quantities, setQuantities] = useState(() =>
-        cart.reduce((acc, item) => ({ ...acc, [item.id]: item.quantity || 1 }), {})
-    );
+    const { cart, deleteFromCart } = useCart();
+
+    const [totalPrice, setTotalPrice] = useState(0);
+    
     const navigate = useNavigate();
 
-    const handleQuantityChange = (id, quantity) => {
-        setQuantities(prev => ({ ...prev, [id]: quantity }));
-    };
-
-    const handleRemove = (id) => {
-        removeFromCart(id);
-        setQuantities(prev => {
-            const { [id]: removed, ...rest } = prev;
-            return rest;
-        });
-    };
+    useEffect(()=>{
+        const tp = cart.reduce( (total, item) => total + (item.product.price * item.quantity), 0);
+        setTotalPrice(tp);
+    }, [cart]);
 
     const handleCheckout = () => {
+        closeModal();
         navigate('/checkout');
-    };
-
-    const calculateTotal = () => {
-        return cart.reduce((total, item) => total + (item.price * (quantities[item.id] || 1)), 0);
     };
 
     return (
@@ -48,32 +39,31 @@ const UserCart = () => {
                 <div className='cart-items'>
                     <ul>
                         {cart.map((item) => (
-                            <li key={item.id} className='cart-item'>
+                            <li key={item.product.id} className='cart-item'>
                                 <div className='item-details'>
                                     <div className='cart-product_body'>
-                                        <img src={item.images[0]} alt={item.name} className='item-image' />
+                                        <img src={item.product.images[0]} alt={item.product.name} className='item-image' />
                                         <div>
-                                        <Link className='item-name' to={`/product/${item.id}`} onClick={closeModal}>{item.name}</Link>
+                                            <Link className='item-name' to={`/product/${item.product.id}`} onClick={closeModal}>{item.product.name }</Link>
                                         </div>
                                     </div>
 
                                     <div className='cart-product_footer ml-5'>
                                         <QuantityControl
-                                            id={item.id}
-                                            quantity={quantities[item.id] || 1}
+                                            item={item}
                                         />
-                                        <button className='btn btn-danger' onClick={() => handleRemove(item.id)}>
+                                        <button className='btn btn-danger' onClick={() => deleteFromCart(item.product.id)}>
                                             Удалить
                                         </button>
 
-                                        <p className='item-price'>{item.price * quantities[item.id]} ₴</p>
+                                        <p className='item-price'>{item.product.price * item.quantity} ₴</p>
                                     </div>
                                 </div>
                             </li>
                         ))}
                     </ul>
                     <div className='cart-summary'>
-                        <h2>Total: {calculateTotal()} ₴</h2>
+                            <h2>Total: {totalPrice} ₴</h2>
                         <button className='checkout-button' onClick={handleCheckout}>
                             Оформить заказ
                         </button>

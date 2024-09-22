@@ -44,11 +44,39 @@ export const getIcons = () => {
     return data;
 };
 
-export const saveCart = async (token) => {
+export const addItemToCart = async (itemId, token) => {
     try {
-        return await makeRequest('post', '/cart/save', cart, token);
+        return await makeRequest('post', '/orders/additemfromcart', itemId, token);
     } catch (error) {
-        console.error('Ошибка сохранения корзины:', error);
+        console.error('Error saving cart:', error);
+    }
+};
+
+export const getCart = async (token) => {
+    return await makeRequest('get', '/orders/getcart', null, token);
+};
+
+export const cleanCart = async (token) => {
+    try {
+        return await makeRequest('post', '/orders/clearcart', null, token);
+    } catch (error) {
+        console.error('Cleaning cart errors:', error);
+    }
+};
+
+export const removeItemFromCart = async(itemId, token) => {
+    try {
+        return await makeRequest('post', '/orders/removeitemfromcart', itemId, token);
+    } catch (error) {
+        console.error('Error reducing quantity:', error);
+    }
+};
+
+export const deleteItemFromCart = async (itemId, token) => {
+    try {
+        return await makeRequest('post', '/orders/removeallitemsfromcart', itemId, token);
+    } catch (error) {
+        console.error('Error deleting item:', error);
     }
 };
 
