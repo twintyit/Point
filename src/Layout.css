@@ -9,6 +9,7 @@
     flex: 1;
     overflow: hidden;
     margin: 0 10%;
+    padding-top: 56px;
 }
 
 .content {

@@ -13,7 +13,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <nav className="navbar">
+        <nav className="navbar fixed-top">
             <div className="container">
                 <div>
                     <Link to="/" className="navbar-brand text-light"><img src="https://cdn-icons-png.flaticon.com/512/4063/4063742.png" alt="Logo" className="navbar-icon" />Shnurok </Link>

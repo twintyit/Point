@@ -16,7 +16,13 @@ export const AuthProvider = ({ children }) => {
         return false;  
     });
 
-    const [userName, setUserName] = useState("");
+    const [userName, setUserName] = useState(()=>{
+       const userName=  localStorage.getItem('userName');
+        if (userName){
+            return userName
+        }
+        return "false";
+    });
     const navigate = useNavigate(); 
 
     useEffect(() => {

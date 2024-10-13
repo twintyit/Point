@@ -1,32 +1,31 @@
-.checkout-form {
-    padding: 20px;
+.collapse-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out; /* Настраиваем плавный переход */
 }
 
-.form-group {
-    margin-bottom: 15px;
+/* Состояние при открытии */
+.collapse-content.open {
+    max-height: 500px; /* Достаточная высота для отображения контента */
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
+.cart-item-image {
+    width: 80px;
+    height: auto;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.cart-item-description {
+    font-size: 0.875rem;
 }
 
-.submit-button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+.cart-item-price {
+    min-width: 100px;
+}
+
+.card-cart-form{
     cursor: pointer;
+    text-align: center;
 }
-
-.submit-button:hover {
-    background-color: #218838;
+.card-cart-form p {
+    margin-bottom: 0rem !important;
 }

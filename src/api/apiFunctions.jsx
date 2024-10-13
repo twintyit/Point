@@ -83,3 +83,19 @@ export const deleteItemFromCart = async (itemId, token) => {
 export const SearchProduct = async (title)=>{
     return await makeRequest('get', `/prod/search?query=${title}`);
 }
+
+export const confirmOrder = async (token, data) => {
+    return await makeRequest('post', `/orders/placeorder`, data, token);
+}
+
+export const getUserAddresses = async (token) => {
+    return await makeRequest('get', `/user/getaddresses`, token);
+}
+
+export const getUserOrders = async (token) => {
+    return await makeRequest('get', `/orders/getorders`, token);
+}
+
+export const repeatOrder = async (token, data) => {
+    return await makeRequest('post', '/orders/repeatorder', data, token )
+}

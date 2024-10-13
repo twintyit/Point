@@ -9,16 +9,9 @@ import './UserCart.css';
 
 const UserCart = () => {
     const { closeModal } = useModal();
-    const { cart, deleteFromCart } = useCart();
+    const { cart,total,  deleteFromCart } = useCart();
 
-    const [totalPrice, setTotalPrice] = useState(0);
-    
     const navigate = useNavigate();
-
-    useEffect(()=>{
-        const tp = cart.reduce( (total, item) => total + (item.product.price * item.quantity), 0);
-        setTotalPrice(tp);
-    }, [cart]);
 
     const handleCheckout = () => {
         closeModal();
@@ -63,7 +56,7 @@ const UserCart = () => {
                         ))}
                     </ul>
                     <div className='cart-summary'>
-                            <h2>Total: {totalPrice} ₴</h2>
+                            <h2>Total: {total} ₴</h2>
                         <button className='checkout-button' onClick={handleCheckout}>
                             Оформить заказ
                         </button>

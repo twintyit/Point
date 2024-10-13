@@ -11,6 +11,7 @@ export const useCart = () => {
 export const CartProvider = ({ children }) => {
     
     const { isAuthenticated, getToken } = useAuth();
+    const [total, setTotal] = useState(0);
      const [cart, setCart] = useState(()=>{
         if(!isAuthenticated){
             const storedCart = localStorage.getItem('cart');
@@ -20,6 +21,11 @@ export const CartProvider = ({ children }) => {
         }
          return [];
      });
+
+     useEffect(() => {
+         const tp = cart.reduce( (total, item) => total + (item.product.price * item.quantity), 0);
+         setTotal(tp);
+     },[cart])
 
     useEffect(() => {
         const fetchCart = async () =>{
@@ -39,7 +45,7 @@ export const CartProvider = ({ children }) => {
             }
         }
         fetchCart();
-    }, []);
+    }, [isAuthenticated]);
 
     const addToCart = async (item) => {
         if (isAuthenticated) {
@@ -77,7 +83,11 @@ export const CartProvider = ({ children }) => {
     };
 
     const getCount = () =>{
-        return cart.length;
+        let count = 0;
+        cart.forEach(i => {
+            count = count + i.quantity;
+        });
+        return count;
     }
 
     const removeFromCart = async (id) => {
@@ -132,7 +142,7 @@ export const CartProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cart, setCart, addToCart, removeFromCart, clearCart, getCount, deleteFromCart, onQuantityChange }}>
+        <CartContext.Provider value={{ cart, total, setCart, addToCart, removeFromCart, clearCart, getCount, deleteFromCart, onQuantityChange }}>
             {children}
         </CartContext.Provider>
     );
