@@ -5,5 +5,12 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Dosis', sans-serif;
+}
+
+:root {
+    --navar-color: #333;
+    --blue-color: #007bff;
+    --discount-color: rgba(255, 0, 0, 0.85);
+    --hover-btn-color: #6c757d;
 }

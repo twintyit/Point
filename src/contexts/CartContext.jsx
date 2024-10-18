@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
     
     const { isAuthenticated, getToken } = useAuth();
     const [total, setTotal] = useState(0);
-     const [cart, setCart] = useState(()=>{
+    const [cart, setCart] = useState(()=>{
         if(!isAuthenticated){
             const storedCart = localStorage.getItem('cart');
             if (storedCart != null) {
@@ -21,6 +21,7 @@ export const CartProvider = ({ children }) => {
         }
          return [];
      });
+    const [showNotification, setShowNotification] = useState(false);
 
      useEffect(() => {
          const tp = cart.reduce( (total, item) => total + (item.product.price * item.quantity), 0);
@@ -71,7 +72,8 @@ export const CartProvider = ({ children }) => {
                     return [...prevCart, { product: item.product, quantity: 1 }];
                 }
             });
-        }  
+        }
+        setShowNotification(true);
     };
 
     const onQuantityChange = (id, newQuantity) => {
@@ -142,7 +144,8 @@ export const CartProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cart, total, setCart, addToCart, removeFromCart, clearCart, getCount, deleteFromCart, onQuantityChange }}>
+        <CartContext.Provider value={{ cart, total, setCart, addToCart, removeFromCart, clearCart,
+            getCount, deleteFromCart, onQuantityChange, setShowNotification,showNotification }}>
             {children}
         </CartContext.Provider>
     );

@@ -6,11 +6,15 @@ import Footer from './components/navigation/footer/Footer';
 import { useModal } from './contexts/ModalContext';
 import Modal from './components/modal/Modal';
 import './Layout.css';
+import Notification from "./components/notification/Notification.jsx";
+import {useCart} from "./contexts/CartContext.jsx";
+import UserCart from "./pages/auth/usercart/UserCart.jsx";
 
 const Layout = ({ children }) => {
     const location = useLocation();
 
-    const { isModalVisible, modalContent, closeModal } = useModal();
+    const {isModalVisible, modalContent, closeModal, openModal} = useModal();
+    const {setShowNotification, showNotification} = useCart();
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const [sidebarContent, setSidebarContent] = useState('');
 
@@ -39,6 +43,13 @@ const Layout = ({ children }) => {
                     <Modal isVisible={isModalVisible} onClose={closeModal}>
                         {modalContent}
                     </Modal>
+                )}
+                {showNotification && (
+                    <Notification
+                        message="Товар добавлен в корзину"
+                        onClose={()=>setShowNotification(false)}
+                        onOpenCart={()=> openModal(<UserCart></UserCart>)}
+                    />
                 )}
             </div>
             <Footer />

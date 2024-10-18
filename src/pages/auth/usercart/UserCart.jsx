@@ -35,9 +35,11 @@ const UserCart = () => {
                             <li key={item.product.id} className='cart-item'>
                                 <div className='item-details'>
                                     <div className='cart-product_body'>
-                                        <img src={item.product.images[0]} alt={item.product.name} className='item-image' />
+                                        <img src={item.product.images[0]} alt={item.product.name}
+                                             className='item-image'/>
                                         <div>
-                                            <Link className='item-name' to={`/product/${item.product.id}`} onClick={closeModal}>{item.product.name }</Link>
+                                            <Link className='item-name' to={`/product/${item.product.id}`}
+                                                  onClick={closeModal}>{item.product.name}</Link>
                                         </div>
                                     </div>
 
@@ -45,7 +47,8 @@ const UserCart = () => {
                                         <QuantityControl
                                             item={item}
                                         />
-                                        <button className='btn btn-danger' onClick={() => deleteFromCart(item.product.id)}>
+                                        <button className='btn btn-danger'
+                                                onClick={() => deleteFromCart(item.product.id)}>
                                             Удалить
                                         </button>
 
@@ -55,13 +58,20 @@ const UserCart = () => {
                             </li>
                         ))}
                     </ul>
-                    <div className='cart-summary'>
-                            <h2>Total: {total} ₴</h2>
-                        <button className='checkout-button' onClick={handleCheckout}>
-                            Оформить заказ
-                        </button>
+                    <div className='cart-summary-container'>
+                        <div className="align-content-center">
+                            <button className="btn btn-light"
+                            onClick={closeModal}>Продолжить покупки</button>
+                        </div>
+                        <div className='cart-summary'>
+                            <h1>{total} ₴</h1>
+                            <button className='checkout-button' onClick={handleCheckout}>
+                                Оформить заказ
+                            </button>
+                        </div>
                     </div>
                 </div>
+
             )}
         </div>
     );

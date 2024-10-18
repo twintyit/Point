@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { getCategoryProducts, getAllProducts } from '../api/apiFunctions.jsx';
-import ProductCard from './productCard/ProductCard.jsx';
-import { useCart } from '../contexts/CartContext.jsx';
-import { SearchProduct } from '../api/apiFunctions';
+import { getCategoryProducts, getAllProducts } from '../../api/apiFunctions.jsx';
+import ProductCard from '../productCard/ProductCard.jsx';
+import { useCart } from '../../contexts/CartContext.jsx';
+import { SearchProduct } from '../../api/apiFunctions.jsx';
+import "./ProductList.css"
 
 const ProductList = ({ categoryId, searchProduct }) => {
-
     const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
- 
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -40,7 +39,7 @@ const ProductList = ({ categoryId, searchProduct }) => {
             <div className="row">
                 <p>{products.length} товаров найдено</p>
                 {products.map(product => (
-                    <div className="col-md-3 mb-4" key={product.id}>
+                    <div className="col-6 col-sm-3" key={product.id}>
                         <ProductCard
                             product={ {product: product, quantity: 1} }
                             onAddToCart={handleAddToCart}
