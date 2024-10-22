@@ -16,8 +16,8 @@ const CheckoutPage = () => {
         city: '',
         country: ''
     });
-    const { cart, cleanCart, total } = useCart();
-    const {userName, getToken} = useAuth();
+    const { state, cleanCart} = useCart();
+    const {authState} = useAuth();
     const [isPersonalInfoOpen, setPersonalInfoOpen] = useState(true);
     const [isAddressOpen, setAddressOpen] = useState(true);
     const [formErrors, setFormErrors] = useState({});
@@ -195,7 +195,7 @@ const CheckoutPage = () => {
                         {/* Блок товаров в корзине */}
                         <div className="mb-4">
                             <h3>Заказ</h3>
-                            {cart.map((item) => (
+                            {state.cart.map((item) => (
                                 <div
                                     className="cart-item d-flex justify-content-between align-items-center mb-3"
                                     key={item.product.id}>
@@ -227,7 +227,7 @@ const CheckoutPage = () => {
                                 <h4>Итог заказа</h4>
                             </div>
                             <div className="card-body">
-                                <p>Общая сумма: {total}₴</p>
+                                <p>Общая сумма: {state.total}₴</p>
                                 <button className="btn btn-success w-100" type="submit">
                                     Подтвердить заказ
                                 </button>

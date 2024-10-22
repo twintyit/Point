@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getCategoryProducts, getAllProducts } from '../../api/apiFunctions.jsx';
-import ProductCard from '../productCard/ProductCard.jsx';
+import ProductCard from '../product-card/ProductCard.jsx';
 import { useCart } from '../../contexts/CartContext.jsx';
 import { SearchProduct } from '../../api/apiFunctions.jsx';
 import "./ProductList.css"

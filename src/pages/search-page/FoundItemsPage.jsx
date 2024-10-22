@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from '../components/productList/ProductList.jsx';
+import ProductList from '../../components/product-list/ProductList.jsx';
 import { useParams } from 'react-router-dom';
 import { CloseButton } from 'react-bootstrap';
 

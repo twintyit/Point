@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Breadcrumbs from '../components/navigation/Breadcrumbs';
-import ProductList from '../components/productList/ProductList.jsx';
-import { getCategoryProducts, getCategoryName } from '../api/apiFunctions'; 
+import Breadcrumbs from '../../components/navigation/breadcrumbs/Breadcrumbs.jsx';
+import ProductList from '../../components/product-list/ProductList.jsx';
+import { getCategoryProducts, getCategoryName } from '../../api/apiFunctions.jsx';
 
 const CategoryPage = () => {
     const { categoryId } = useParams();

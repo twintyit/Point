@@ -9,7 +9,7 @@ const Breadcrumbs = () => {
         <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                    <Link to="/">Home</Link>
+                    <Link to="/public">Home</Link>
                 </li>
                 {pathnames.map((value, index) => {
                     const to = `/${pathnames.slice(0, index + 1).join('/')}`;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories } from '../../../api/apiFunctions';
-import SidebarCabinetButton from './sidebarCabinetButton/SidebarCabinetButton';
+import SidebarCabinetButton from './sidebar-cabinet-button/SidebarCabinetButton';
 import { useModal } from '../../../contexts/ModalContext';
-import UserCart from '../../../pages/auth/usercart/UserCart';
+import UserCart from '../../../pages/cart/Cart.jsx';
 
 import './Sidebar.css';
 

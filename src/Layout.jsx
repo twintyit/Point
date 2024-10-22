@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/navigation/navbar/Navbar';
-import Sidebar from './components/navigation/slidebar/Sidebar';
+import Sidebar from './components/navigation/sidebar/Sidebar';
 import Footer from './components/navigation/footer/Footer';
 import { useModal } from './contexts/ModalContext';
 import Modal from './components/modal/Modal';
 import './Layout.css';
 import Notification from "./components/notification/Notification.jsx";
 import {useCart} from "./contexts/CartContext.jsx";
-import UserCart from "./pages/auth/usercart/UserCart.jsx";
+import UserCart from "./pages/cart/Cart.jsx";
 
 const Layout = ({ children }) => {
     const location = useLocation();
 
     const {isModalVisible, modalContent, closeModal, openModal} = useModal();
-    const {setShowNotification, showNotification} = useCart();
+    const {state, dispatch} = useCart();
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const [sidebarContent, setSidebarContent] = useState('');
 
@@ -44,10 +44,10 @@ const Layout = ({ children }) => {
                         {modalContent}
                     </Modal>
                 )}
-                {showNotification && (
+                {state.showNotification && (
                     <Notification
                         message="Товар добавлен в корзину"
-                        onClose={()=>setShowNotification(false)}
+                        onClose={()=> dispatch({ type: 'SHOW_NOTIFICATION', payload: false })}
                         onOpenCart={()=> openModal(<UserCart></UserCart>)}
                     />
                 )}

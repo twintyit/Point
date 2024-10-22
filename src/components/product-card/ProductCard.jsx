@@ -3,12 +3,6 @@ import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
 const ProductCard = ({ product, onAddToCart }) => {
-
-    useEffect(() => {
-        console.log(product);
-
-    }, [])
-
     return (
         <Link to={`/product/${product.product.id}`} className="product-link">
             <div className="card product-card">

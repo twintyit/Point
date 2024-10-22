@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from '../../components/carousel/Carousel';
-import ProductList from '../../components/productList/ProductList.jsx';
+import ProductList from '../../components/product-list/ProductList.jsx';
 import './HomePage.css';
 
 const HomePage = () => {

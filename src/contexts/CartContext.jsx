@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { useAuth } from './AuthContext'
 import { addItemToCart, getCart, cleanCart, removeItemFromCart, deleteItemFromCart } from '../api/apiFunctions';
+import {cartReducer, initialCartState} from "../reducer/CartReducer.jsx";
 
 const CartContext = createContext();
 
@@ -9,143 +10,100 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-    
-    const { isAuthenticated, getToken } = useAuth();
-    const [total, setTotal] = useState(0);
-    const [cart, setCart] = useState(()=>{
-        if(!isAuthenticated){
-            const storedCart = localStorage.getItem('cart');
-            if (storedCart != null) {
-               return JSON.parse(storedCart);
-            }
-        }
-         return [];
-     });
-    const [showNotification, setShowNotification] = useState(false);
-
-     useEffect(() => {
-         const tp = cart.reduce( (total, item) => total + (item.product.price * item.quantity), 0);
-         setTotal(tp);
-     },[cart])
+    const { authState, getToken } = useAuth();
+    const [state, dispatch] = useReducer(cartReducer, initialCartState);
 
     useEffect(() => {
-        const fetchCart = async () =>{
-            if (isAuthenticated) {
-                const token = getToken();
-                const res = await getCart(token);
-           
-                if(res.status.code === 0){
-                    setCart(res.data.items);
+        const fetchCart = async () => {
+            if (authState.isAuthenticated) {
+                const res = await getCart(authState.token);
+                if (res.status.code === 0) {
+                    dispatch({ type: 'SET_CART', payload: res.data.items });
                 }
-              
             } else {
                 const storedCart = localStorage.getItem('cart');
-                if (storedCart != null) {
-                    setCart(JSON.parse(storedCart));
+                if (storedCart) {
+                    dispatch({ type: 'SET_CART', payload: JSON.parse(storedCart)});
                 }
             }
-        }
+        };
         fetchCart();
-    }, [isAuthenticated]);
+    }, [authState.isAuthenticated, authState.token]);
+
+    useEffect(() => {
+        if (!authState.isAuthenticated && state.cart.length > 0) {
+            localStorage.setItem('cart', JSON.stringify(state.cart));
+        }
+    }, [state.cart, authState.isAuthenticated]);
+
+    useEffect(() => {
+        let tmpCart = JSON.parse(localStorage.getItem('cart'));
+        if(tmpCart != null) {
+            tmpCart.map((item) => addToCart(item));
+            localStorage.setItem('cart', JSON.stringify([]));
+        }
+    }, [authState.isAuthenticated])
 
     const addToCart = async (item) => {
-        if (isAuthenticated) {
-            const token = getToken();
-            const res1 = await addItemToCart(item.product.id, token);
-            if (res1.status.code === 0) {
-                const res2 = await getCart(token);
-                if (res2.status.code === 0) {
-                    setCart(res2.data.items);
-                }
+        if (authState.isAuthenticated) {
+            await addItemToCart(item.product.id, authState.token);
+            const res = await getCart(authState.token);
+            if (res.status.code === 0) {
+                dispatch({ type: 'ADD_ITEM', payload: item });
             }
-
         } else {
-            setCart((prevCart) => {
-                const existingItem = prevCart.find((cartItem) => cartItem.product.id === item.product.id);
-                if (existingItem) {
-                    return prevCart.map((cartItem) =>
-                        cartItem.product.id === item.product.id
-                            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                            : cartItem
-                    );
-                } else {
-                    return [...prevCart, { product: item.product, quantity: 1 }];
-                }
-            });
+            await dispatch({ type: 'ADD_ITEM', payload: item });
         }
-        setShowNotification(true);
     };
-
-    const onQuantityChange = (id, newQuantity) => {
-       const newCart = cart.map(
-            (item) =>item.id === id ? 
-            { ...item, quantity: newQuantity } : item);+
-
-        setCart(newCart);
-    };
-
-    const getCount = () =>{
-        let count = 0;
-        cart.forEach(i => {
-            count = count + i.quantity;
-        });
-        return count;
-    }
 
     const removeFromCart = async (id) => {
-        if(isAuthenticated){
+        if (authState.isAuthenticated) {
             const token = getToken();
-            const res1 = await removeItemFromCart(id, token);
-            if (res1.status.code === 0) {
-                const res2 = await getCart(token);
-                if (res2.status.code === 0) {
-                    setCart(res2.data.items);
-                }
+            await removeItemFromCart(id, token);
+            const res = await getCart(token);
+            if (res.status.code === 0) {
+                dispatch({ type: 'SET_CART', payload: res.data.items });
             }
-        }else{
-            setCart((prevCart) => {
-                const existingItem = prevCart.find((cartItem) => cartItem.product.id === id);
-                if (existingItem) {
-                    return prevCart.map((cartItem) =>
-                    cartItem.product.id === id
-                    && cartItem.quantity > 1
-                            ? { ...cartItem, quantity: cartItem.quantity - 1 }
-                            : cartItem
-                    );
-                } 
-            });
+        } else {
+            dispatch({ type: 'REMOVE_ITEM', payload: id });
         }
     };
 
     const deleteFromCart = async (id) => {
-        if (isAuthenticated) {
-            const token = getToken();
-            const res1 = await deleteItemFromCart(id, token);
-            if (res1.status.code === 0) {
-                const res2 = await getCart(token);
-                if (res2.status.code === 0) {
-                    setCart(res2.data.items);
-                }
+        if (authState.isAuthenticated) {
+            await deleteItemFromCart(id, authState.token);
+            const res = await getCart(authState.token);
+            if (res.status.code === 0) {
+                dispatch({ type: 'SET_CART', payload: res.data.items });
             }
         } else {
-            setCart((prevCart) => {
-                return prevCart.filter((cartItem) => cartItem.product.id !== id);
-            });
+            dispatch({ type: 'DELETE_ITEM', payload: id });
         }
     };
 
     const clearCart = () => {
-        if(isAuthenticated){
-            cleanCart(getToken()); 
+        if (authState.isAuthenticated) {
+            cleanCart(authState.token);
         } else {
             localStorage.removeItem('cart');
         }
-       
+        dispatch({ type: 'CLEAR_CART' });
     };
 
+    const getCount = () => {
+       return state.cart.reduce((totalCount, item) => totalCount + item.quantity, 0);
+    }
+
     return (
-        <CartContext.Provider value={{ cart, total, setCart, addToCart, removeFromCart, clearCart,
-            getCount, deleteFromCart, onQuantityChange, setShowNotification,showNotification }}>
+        <CartContext.Provider value={{
+            state,
+            dispatch,
+            addToCart,
+            removeFromCart,
+            deleteFromCart,
+            clearCart,
+            getCount,
+        }}>
             {children}
         </CartContext.Provider>
     );

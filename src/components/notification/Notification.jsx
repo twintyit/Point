@@ -1,12 +1,12 @@
 // Notification.js
 import React, { useEffect } from 'react';
-import './Notification.css'; // Импортируем стили для алерта
+import './Notification.css';
 
 const Notification = ({ message, onClose, onOpenCart }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose();
-        }, 5000); // Удаляем уведомление через 5 секунд
+        }, 5000);
 
         return () => clearTimeout(timer);
     }, [onClose]);

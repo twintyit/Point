@@ -1,21 +1,30 @@
-export const initialAuthState = {
-    isAuthenticated: false,
-    user: null,
-    token: null,
+export const initialState = {
+    isAuthenticated: !!localStorage.getItem('token'),
+    userName: localStorage.getItem('user') || null,
+    token: localStorage.getItem('token') || null,
 };
 
-export const authReducer = (state = initialAuthState, action) => {
+export const authReducer = (authState, action) => {
     switch (action.type) {
         case 'LOGIN':
             return {
-                ...state,
+                ...authState,
                 isAuthenticated: true,
-                user: action.payload.user,
+                userName: action.payload.userName,
                 token: action.payload.token,
             };
         case 'LOGOUT':
-            return initialAuthState;
+            return {
+                ...authState,
+                isAuthenticated: false,
+                userName: null,
+                token: null,
+            };
+        case 'SET_USERNAME':
+            return {
+                userName: action.payload,
+            };
         default:
-            return state;
+            return authState;
     }
 };

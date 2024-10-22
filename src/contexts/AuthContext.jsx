@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {createContext, useContext, useEffect, useReducer} from 'react';
 import { login, logout } from '../api/apiFunctions';
 import { useNavigate } from 'react-router-dom';
+import {authReducer, initialState} from "../reducer/AuthReducer.jsx";
 
 const AuthContext = createContext();
 
@@ -9,59 +10,52 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(()=>{
-        if (localStorage.getItem('token')){
-            return true
-        }
-        return false;  
-    });
+    const navigate = useNavigate();
 
-    const [userName, setUserName] = useState(()=>{
-       const userName=  localStorage.getItem('userName');
-        if (userName){
-            return userName
-        }
-        return "false";
-    });
-    const navigate = useNavigate(); 
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsAuthenticated(true);
-        }
-    }, []);
+    const [authState, dispatch] = useReducer(authReducer, initialState);
 
     const loginUser = async (email, password) => {
         const response = await login({
             UserEmail: email,
             UserPassword: password,
         });
-        if (response.status.code === 0){
-            localStorage.setItem('token', response.data);
-            localStorage.setItem('userName', email);
-            setUserName(email);
-            setIsAuthenticated(true);
+
+        if (response.status.code === 0) {
+            const token = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', email);
+            dispatch({
+                type: 'LOGIN',
+                payload: { userName: email, token },
+            });
         }
     };
 
     const logoutUser = async (redirectTo) => {
-        const token = localStorage.getItem('token');
-        const res = await logout(token);
+        const res = await logout(authState.token);
 
         if (res.status.code === 0) {
             localStorage.removeItem('token');
-            setIsAuthenticated(false);
+            localStorage.removeItem('user');
+            dispatch({ type: 'LOGOUT' });
             navigate(redirectTo);
         }
     };
 
-    const getToken = () =>{
-        return localStorage.getItem('token');
-    }
+    const getToken = () => {
+        return authState.token;
+    };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, userName, loginUser, logoutUser, getToken }}>
+        <AuthContext.Provider value={{
+            isAuthenticated: authState.isAuthenticated,
+            userName: authState.userName,
+            authState,
+            dispatch,
+            loginUser,
+            logoutUser,
+            getToken
+        }}>
             {children}
         </AuthContext.Provider>
     );
