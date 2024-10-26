@@ -32,13 +32,15 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         if (!authState.isAuthenticated && state.cart.length > 0) {
+            console.log(2);
             localStorage.setItem('cart', JSON.stringify(state.cart));
         }
     }, [state.cart, authState.isAuthenticated]);
 
     useEffect(() => {
         let tmpCart = JSON.parse(localStorage.getItem('cart'));
-        if(tmpCart != null) {
+        if(tmpCart != null && authState.isAuthenticated) {
+            console.log(1);
             tmpCart.map((item) => addToCart(item));
             localStorage.setItem('cart', JSON.stringify([]));
         }
