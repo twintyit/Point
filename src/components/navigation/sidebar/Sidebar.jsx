@@ -48,7 +48,7 @@ const Sidebar = ({ mode, isVisible }) => {
                             </a>
                         ) : (
                             <Link to={item.link || `/category/${item.id}`} className='d-flex align-items-center'>
-                                <span className='material-icons icon-category'>{item.icon || 'dashboard'}</span>
+                                <img className="icon-category" src={item.imgUrl ? item.imgUrl[0] : 'https://simpleicon.com/wp-content/uploads/dashboard.svg'}/>
                                 <span>{item.name}</span>
                             </Link>
                         )}

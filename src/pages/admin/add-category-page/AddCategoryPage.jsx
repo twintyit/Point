@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 
 import './AddCategoryPage.css';
+import {useAuth} from "../../../contexts/AuthContext.jsx";
 
 const AddCategoryPage  = () => {
+    const {authState} = useAuth();
     const [name, setName] = useState("");
     const [slug, setSlug] = useState("");
     const [description, setDescription] = useState("");
@@ -18,17 +20,16 @@ const AddCategoryPage  = () => {
         formData.append("slug", slug || ""); // Изменено на маленькие буквы
         formData.append("description", description); // Изменено на маленькие буквы
 
-        // Добавляем изображения
         Array.from(images).forEach((image) => formData.append("images", image)); // Изменено на маленькие буквы
 
         try {
             const response = await fetch("https://shnurok.azurewebsites.net/api/prod/createcategories", {
                 method: "POST",
                 headers: {
-                    'Authorization': 'C3B90928137C34FACB117C5597DA37EB25509004',
+                    'Authorization': authState.token,
 
                 },
-                body: formData, // Разкомментировано
+                body: formData,
             });
 
             if (!response.ok) throw new Error("Ошибка при отправке формы");

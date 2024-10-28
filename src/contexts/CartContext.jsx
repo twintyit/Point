@@ -23,7 +23,7 @@ export const CartProvider = ({ children }) => {
             } else {
                 const storedCart = localStorage.getItem('cart');
                 if (storedCart) {
-                    dispatch({ type: 'SET_CART', payload: JSON.parse(storedCart)});
+                    await dispatch({ type: 'SET_CART', payload: JSON.parse(storedCart)});
                 }
             }
         };
@@ -31,16 +31,14 @@ export const CartProvider = ({ children }) => {
     }, [authState.isAuthenticated, authState.token]);
 
     useEffect(() => {
-        if (!authState.isAuthenticated && state.cart.length > 0) {
-            console.log(2);
-            localStorage.setItem('cart', JSON.stringify(state.cart));
-        }
-    }, [state.cart, authState.isAuthenticated]);
+         if(!authState.isAuthenticated && state.cart.length > 0){
+             window.localStorage.setItem('cart', JSON.stringify(state.cart) );
+         }
+    }, [state.cart]);
 
     useEffect(() => {
         let tmpCart = JSON.parse(localStorage.getItem('cart'));
         if(tmpCart != null && authState.isAuthenticated) {
-            console.log(1);
             tmpCart.map((item) => addToCart(item));
             localStorage.setItem('cart', JSON.stringify([]));
         }

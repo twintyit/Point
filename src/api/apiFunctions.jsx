@@ -99,3 +99,7 @@ export const getUserOrders = async (token) => {
 export const repeatOrder = async (token, data) => {
     return await makeRequest('post', '/orders/repeatorder', data, token )
 }
+
+export const deleteCategory = async (token, id) => {
+    return await makeRequest('post', '/prod/deletecategory', id, token )
+}

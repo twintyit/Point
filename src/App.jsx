@@ -20,6 +20,7 @@ import AddProductPage from "./pages/admin/add-product-page/AddProductPage.jsx";
 import AddCategoryPage from "./pages/admin/add-category-page/AddCategoryPage.jsx";
 import DeleteProductPage from "./pages/admin/delete-product-page/DeleteProductPage.jsx";
 import AdminPanel from "./pages/admin/admin-panel/AdminPanel.jsx";
+import DeleteCategoryPage from "./pages/admin/delete-category-page/DeleteCategoryPage.jsx";
 
 function App() {
   
@@ -45,6 +46,7 @@ function App() {
                     <Route path="/admin/add-product" element={<AddProductPage />} />
                     <Route path="/admin/add-category" element={<AddCategoryPage />} />
                     <Route path="/admin/delete-product" element={<DeleteProductPage />} />
+                    <Route path="/admin/delete-category" element={<DeleteCategoryPage />} />
                 </Routes>
               </Layout>
             </ModalProvider>

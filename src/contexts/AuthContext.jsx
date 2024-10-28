@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
         if (res.status.code === 0) {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
+            localStorage.setItem('cart', JSON.stringify([]));
             dispatch({ type: 'LOGOUT' });
             navigate(redirectTo);
         }
