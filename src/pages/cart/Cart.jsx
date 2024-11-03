@@ -20,7 +20,6 @@ const UserCart = () => {
     return (
         <div className='user-cart'>
             <h3 className='cart-name'>Корзина</h3>
-
             {state.cart.length === 0 ? (
                 <div className='cart-empty'>
                     <img src='https://xl-static.rozetka.com.ua/assets/img/design/modal-cart-dummy.svg'></img>

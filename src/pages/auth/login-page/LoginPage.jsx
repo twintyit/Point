@@ -30,39 +30,41 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="container">
-            <h3>Login</h3>
-            <form onSubmit={handleLogin}>
-                <div className="mb-3 form-floating">
+        <div className="login-page-container container">
+            <h3 className="text-center mb-4">Login</h3>
+            <form onSubmit={handleLogin} className="form-container">
+                <div className="input-group mb-3">
                     <input
                         type="email"
                         ref={loginRef}
-                        className={`form-control input-no-border ${error && error.includes('Email') ? 'is-invalid' : ''}`}
-                        id="floatingInput" 
-                        placeholder="name@example.com"
+                        className={`form-control ${error && error.includes('Email') ? 'is-invalid' : ''}`}
+                        id="emailInput"
+                        placeholder=" "
+                        required
                     />
-                    <label htmlFor="floatingInput" className="form-label">Email</label>
+                    <label htmlFor="emailInput" className="form-label">Email</label>
                     {error && error.includes('Email') && <div className="invalid-feedback">{error}</div>}
                 </div>
-                <div className="mb-3 form-floating">
-                   
+                <div className="input-group mb-3">
                     <input
                         type="password"
                         ref={passwordRef}
-                        className={`form-control input-no-border ${error && error.includes('Password') ? 'is-invalid' : ''}`}
-                        id="floatingPassword"
-                        placeholder="Password"
+                        className={`form-control ${error && error.includes('Password') ? 'is-invalid' : ''}`}
+                        id="passwordInput"
+                        placeholder=" "
+                        required
                     />
-                    <label htmlFor="floatingPassword" className="form-label">Password</label>
+                    <label htmlFor="passwordInput" className="form-label">Password</label>
                     {error && error.includes('Password') && <div className="invalid-feedback">{error}</div>}
                 </div>
-                    <button type="submit" className="btn btn-primary">Log In</button>
-                    {error && !error.includes('Email') && !error.includes('Password') && <p className="text-danger mt-3">{error}</p>}
-                    <p className="mt-3">
-                        Нет аккаунта? <Link to="/signup" onClick={closeModal}>Зарегистрироваться</Link>
-                    </p>
+                <button type="submit" className="btn btn-primary w-100">Log In</button>
+                {error && !error.includes('Email') && !error.includes('Password') && (
+                    <p className="text-danger mt-3">{error}</p>
+                )}
+                <p className="mt-3 text-center">
+                    Нет аккаунта? <Link to="/signup" onClick={closeModal}>Зарегистрироваться</Link>
+                </p>
             </form>
-           
         </div>
     );
 };

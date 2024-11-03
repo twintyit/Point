@@ -3,8 +3,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: calc(100% - 60rem);
+    min-width: fit-content;
     min-height: calc(100% - 1rem);
+    max-width: 90vw;
+    width: auto;
 }
 
 .modal-dialog.modal-show {
@@ -20,6 +22,7 @@
     border-radius: 0.5rem;
     max-height: 80vh;
     overflow-y: auto;
+    width: 100%;
 }
 
 

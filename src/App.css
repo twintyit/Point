@@ -21,3 +21,39 @@
     width: 100%;
     padding: 0% 10%;
 }
+
+.floating-label-input-group {
+    position: relative;
+}
+
+.floating-label-input-group .form-control {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    padding: 10px 0;
+    box-shadow: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.floating-label-input-group .form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+.floating-label-input-group .form-label {
+    position: absolute;
+    top: 0.6rem;
+    font-size: 1rem;
+    color: #aaa;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.floating-label-input-group .form-control:focus + .form-label,
+.floating-label-input-group .form-control:not(:placeholder-shown) + .form-label {
+    top: -0.6rem;
+    font-size: 0.85rem;
+    color: #007bff;
+}
