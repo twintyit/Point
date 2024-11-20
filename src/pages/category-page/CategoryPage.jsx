@@ -14,6 +14,7 @@ const CategoryPage = () => {
             try {
                 const productsResponse = await getCategoryProducts(categoryId);
                 const categoryNameResponse = await getCategoryName(categoryId);
+                console.log(categoryNameResponse)
                 setProducts(productsResponse.data);
                 setCategoryName(categoryNameResponse.data.name);
             } catch (error) {

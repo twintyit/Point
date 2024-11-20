@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import { getProductDetails } from '../../api/apiFunctions';
 import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
 import './ProductDetail.css'
+import {useCart} from "../../contexts/CartContext.jsx";
 
 const ProductDetail = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+    const {addToCart} = useCart();
 
     useEffect(() => {
 
@@ -36,7 +38,12 @@ const ProductDetail = () => {
                             <h2>{product.name}</h2>
                             <Card.Subtitle className="mb-2 text-muted">{product.price} ₴</Card.Subtitle>
                             <Card.Text>{product.description}</Card.Text>
-                            <Button variant="primary">Добавить в корзину</Button>
+                            <button className="btn btn-primary" onClick={(e)=> {
+                                e.preventDefault();
+                                addToCart({product: product, quantity: 1})
+                            }}>
+                                Добавить в корзину
+                            </button>
                             <ListGroup className="mt-3">
                                 <ListGroup.Item>
                                     <strong>Stock Quantity:</strong> {product.stockQuantity}

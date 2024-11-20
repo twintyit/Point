@@ -45,6 +45,7 @@ export const CartProvider = ({ children }) => {
     }, [authState.isAuthenticated])
 
     const addToCart = async (item) => {
+        console.log(item);
         if (authState.isAuthenticated) {
             await addItemToCart(item.product.id, authState.token);
             const res = await getCart(authState.token);

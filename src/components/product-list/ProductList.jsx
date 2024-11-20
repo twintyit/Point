@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { getCategoryProducts, getAllProducts } from '../../api/apiFunctions.jsx';
 import ProductCard from '../product-card/ProductCard.jsx';
 import { useCart } from '../../contexts/CartContext.jsx';
-import { SearchProduct } from '../../api/apiFunctions.jsx';
+import { searchProduct } from '../../api/apiFunctions.jsx';
 import "./ProductList.css"
 
-const ProductList = ({ categoryId, searchProduct }) => {
+const ProductList = ({ categoryId, searchedProduct }) => {
     const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
 
@@ -15,8 +15,8 @@ const ProductList = ({ categoryId, searchProduct }) => {
                 let response;
                 if (categoryId) {
                     response = await getCategoryProducts(categoryId);
-                } else if (searchProduct){
-                    response = await SearchProduct(searchProduct);
+                } else if (searchedProduct){
+                    response = await searchProduct(searchedProduct);
                 } 
                 else {
                     response = await getAllProducts();
@@ -28,7 +28,7 @@ const ProductList = ({ categoryId, searchProduct }) => {
         };
 
         fetchProducts();
-    }, [categoryId, searchProduct]);
+    }, [categoryId, searchedProduct]);
 
     const handleAddToCart = (product) => {
         addToCart(product);

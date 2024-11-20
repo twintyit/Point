@@ -31,9 +31,9 @@ const LoginPage = () => {
 
     return (
         <div className="login-page-container container">
-            <h3 className="text-center mb-4">Login</h3>
+            <h3 className="text-center mb-4">Войти</h3>
             <form onSubmit={handleLogin} className="form-container">
-                <div className="input-group mb-3">
+                <div className="floating-label-input-group mb-3">
                     <input
                         type="email"
                         ref={loginRef}
@@ -45,7 +45,7 @@ const LoginPage = () => {
                     <label htmlFor="emailInput" className="form-label">Email</label>
                     {error && error.includes('Email') && <div className="invalid-feedback">{error}</div>}
                 </div>
-                <div className="input-group mb-3">
+                <div className="floating-label-input-group mb-3">
                     <input
                         type="password"
                         ref={passwordRef}

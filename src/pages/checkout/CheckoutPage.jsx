@@ -1,14 +1,16 @@
 
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useCart} from "../../contexts/CartContext.jsx";
 import './CheckoutPage.css';
 import {Link} from "react-router-dom";
 import {confirmOrder} from "../../api/apiFunctions.jsx";
-import {useAuth} from "../../contexts/AuthContext.jsx"; // Подключаем стили
+import {useAuth} from "../../contexts/AuthContext.jsx";
+import LoginPage from "../auth/login-page/LoginPage.jsx"; // Подключаем стили
 
 const CheckoutPage = () => {
+    const {authState} = useAuth();
     const [formData, setFormData] = useState({
-        name: '',
+        name: authState.userName,
         lastname: '',
         phone: '',
         email: '',
@@ -16,8 +18,8 @@ const CheckoutPage = () => {
         city: '',
         country: ''
     });
+
     const { state, cleanCart} = useCart();
-    const {authState} = useAuth();
     const [isPersonalInfoOpen, setPersonalInfoOpen] = useState(true);
     const [isAddressOpen, setAddressOpen] = useState(true);
     const [formErrors, setFormErrors] = useState({});
@@ -74,68 +76,76 @@ const CheckoutPage = () => {
                                     {isPersonalInfoOpen ? 'Свернуть' : 'Развернуть'}
                                 </p>
                             </div>
+
+
+
                             <div className={`collapse-content ${isPersonalInfoOpen ? 'open' : 'closed'}`}>
+                                {!authState.isAuthenticated ?
+                                    <LoginPage></LoginPage> :
                                 <div className="row card-body">
                                     <div className="col">
-                                        <div className="mb-3">
-                                            <label htmlFor="name" className="form-label">Имя</label>
+                                        <div className="floating-label-input-group mb-3">
                                             <input
                                                 type="text"
                                                 id="name"
                                                 name="name"
                                                 className="form-control"
-                                                placeholder="Введите имя"
                                                 value={formData.name}
+                                                placeholder=" "
                                                 onChange={handleInputChange}
                                             />
+                                            <label htmlFor="name" className="form-label">Имя</label>
                                             {formErrors.name && <div className="text-danger">{formErrors.name}</div>}
                                         </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="phone" className="form-label">Номер телефона</label>
+                                        <div className="floating-label-input-group mb-3">
                                             <input
                                                 type="text"
                                                 id="phone"
                                                 name="phone"
                                                 className="form-control"
-                                                placeholder="Введите номер телефона"
+                                                placeholder=" "
                                                 value={formData.phone}
                                                 onChange={handleInputChange}
                                             />
+                                            <label htmlFor="phone" className="form-label">Номер телефона</label>
                                             {formErrors.phone && <div className="text-danger">{formErrors.phone}</div>}
                                         </div>
                                     </div>
                                     <div className="col">
-                                        <div className="mb-3">
-                                            <label htmlFor="lastname" className="form-label">Фамилия</label>
+                                        <div className="floating-label-input-group mb-3">
+
                                             <input
                                                 type="text"
                                                 id="lastname"
                                                 name="lastname"
                                                 className="form-control"
-                                                placeholder="Введите фамилию"
+                                                placeholder=" "
                                                 value={formData.lastname}
                                                 onChange={handleInputChange}
                                             />
+                                            <label htmlFor="lastname" className="form-label">Фамилия</label>
                                             {formErrors.lastname &&
                                                 <div className="text-danger">{formErrors.lastname}</div>}
                                         </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="email" className="form-label">Электронная почта</label>
+                                        <div className="floating-label-input-group mb-3">
                                             <input
                                                 type="email"
                                                 id="email"
                                                 name="email"
                                                 className="form-control"
-                                                placeholder="Введите электронную почту"
                                                 value={formData.email}
+                                                placeholder=" "
                                                 onChange={handleInputChange}
                                             />
+                                            <label htmlFor="email" className="form-label">Электронная почта</label>
                                             {formErrors.email && <div className="text-danger">{formErrors.email}</div>}
                                         </div>
                                     </div>
                                 </div>
+                                }
                             </div>
                         </div>
+
                         {/* Блок с адресом доставки */}
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between card-cart-form"
@@ -147,44 +157,47 @@ const CheckoutPage = () => {
                             </div>
                             <div className={`collapse-content ${isAddressOpen ? 'open' : 'closed'}`}>
                                 <div className="card-body">
-                                    <div className="mb-3">
-                                        <label htmlFor="address" className="form-label">Улица, номер дома</label>
+                                    <div className="floating-label-input-group mb-3">
+
                                         <input
                                             type="text"
                                             id="address"
                                             name="address"
                                             className="form-control"
-                                            placeholder="Введите адрес"
+                                            placeholder=" "
                                             value={formData.address}
                                             onChange={handleInputChange}
                                         />
+                                        <label htmlFor="address" className="form-label">Улица, номер дома</label>
                                         {formErrors.address &&
                                             <div className="text-danger">{formErrors.address}</div>}
                                     </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="city" className="form-label">Город, почтовый индекс</label>
+                                    <div className="floating-label-input-group mb-3">
+
                                         <input
                                             type="text"
                                             id="city"
                                             name="city"
                                             className="form-control"
-                                            placeholder="Введите город и почтовый индекс"
+                                            placeholder=" "
                                             value={formData.city}
                                             onChange={handleInputChange}
                                         />
+                                        <label htmlFor="city" className="form-label">Город, почтовый индекс</label>
                                         {formErrors.city && <div className="text-danger">{formErrors.city}</div>}
                                     </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="country" className="form-label">Страна</label>
+                                    <div className="floating-label-input-group mb-3">
+
                                         <input
                                             type="text"
                                             id="country"
                                             name="country"
                                             className="form-control"
-                                            placeholder="Введите страну"
+                                            placeholder=" "
                                             value={formData.country}
                                             onChange={handleInputChange}
                                         />
+                                        <label htmlFor="country" className="form-label">Страна</label>
                                         {formErrors.country &&
                                             <div className="text-danger">{formErrors.country}</div>}
                                     </div>
@@ -228,7 +241,7 @@ const CheckoutPage = () => {
                             </div>
                             <div className="card-body">
                                 <p>Общая сумма: {state.total}₴</p>
-                                <button className="btn btn-success w-100" type="submit">
+                                <button className="btn btn-primary w-100" type="submit">
                                     Подтвердить заказ
                                 </button>
                             </div>

@@ -18,9 +18,10 @@ const handleErrors = (errorCode) => {
 
 export const makeRequest = async (method, url, data = null, token = null) => {
     try {
+        console.log(url,data);
         const config = {
             headers: {
-                'Content-Type': 'application/json', 
+              'Content-Type': 'application/json',
             },
         };
 

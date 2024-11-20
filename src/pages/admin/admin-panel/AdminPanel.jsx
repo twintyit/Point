@@ -7,14 +7,20 @@ const AdminPanel = () => {
     return (
         <div className="container">
             <div>
-                <button className="btn btn-success" onClick={() => navigate('/admin/add-product')}>Добавить товар
+                <button className="btn btn-outline-info"  onClick={() => navigate('/admin/category')}>Категории
                 </button>
-                <button className="btn btn-success" onClick={() => navigate('/admin/add-category')}>Добавить категорию
+                <button className="btn btn-outline-info" onClick={() => navigate('/admin/product')}>Продукты
                 </button>
-                <button className="btn btn-danger" onClick={() => navigate('/admin/delete-product')}>Удалить товар
-                </button>
-                <button className="btn btn-danger" onClick={() => navigate('/admin/delete-category')}>Удалить категорию
-                </button>
+
+
+                {/*<button className="btn btn-success" onClick={() => navigate('/admin/add-product')}>Добавить товар*/}
+                {/*</button>*/}
+                {/*<button className="btn btn-success" onClick={() => navigate('/admin/add-category')}>Добавить категорию*/}
+                {/*</button>*/}
+                {/*<button className="btn btn-danger" onClick={() => navigate('/admin/delete-product')}>Удалить товар*/}
+                {/*</button>*/}
+                {/*<button className="btn btn-danger" onClick={() => navigate('/admin/delete-category')}>Удалить категорию*/}
+                {/*</button>*/}
             </div>
         </div>
     );

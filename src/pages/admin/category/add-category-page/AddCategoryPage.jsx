@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import './AddCategoryPage.css';
-import {useAuth} from "../../../contexts/AuthContext.jsx";
+import {useAuth} from "../../../../contexts/AuthContext.jsx";
 
 const AddCategoryPage  = () => {
     const {authState} = useAuth();

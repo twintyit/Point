@@ -11,7 +11,7 @@ const FoundItemsPage = () => {
         <>
         <div>
                 <h4 style={{fontWeight: 700}}>Результаты поиска <span style={{ color: 'blue' }}>"{text}"</span></h4>
-                <ProductList searchProduct={text}></ProductList>
+                <ProductList searchedProduct={text}></ProductList>
         </div>
         </>
     );

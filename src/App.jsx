@@ -17,10 +17,10 @@ import { AuthProvider } from './contexts/AuthContext';
 
 import './App.css';
 import AddProductPage from "./pages/admin/add-product-page/AddProductPage.jsx";
-import AddCategoryPage from "./pages/admin/add-category-page/AddCategoryPage.jsx";
-import DeleteProductPage from "./pages/admin/delete-product-page/DeleteProductPage.jsx";
+import AddCategoryPage from "./pages/admin/category/add-category-page/AddCategoryPage.jsx";
 import AdminPanel from "./pages/admin/admin-panel/AdminPanel.jsx";
-import DeleteCategoryPage from "./pages/admin/delete-category-page/DeleteCategoryPage.jsx";
+import CategoryManager from "./pages/admin/category/category-manager/CategoryManager.jsx";
+import EditCategoryPage from "./pages/admin/category/edit-category-page/EditCategoryPage.jsx";
 
 function App() {
   
@@ -43,10 +43,13 @@ function App() {
                     <Route path="/checkout" element={<CheckoutPage />} />
 
                     <Route path="/admin" element={<AdminPanel />} />
+                    <Route path="/admin/category" element={<CategoryManager />} />
+                    <Route path="/admin/category/edit/:categoryId" element={<EditCategoryPage />} />
+
+                    <Route path="/admin/product" element={<AdminPanel />} />
                     <Route path="/admin/add-product" element={<AddProductPage />} />
                     <Route path="/admin/add-category" element={<AddCategoryPage />} />
-                    <Route path="/admin/delete-product" element={<DeleteProductPage />} />
-                    <Route path="/admin/delete-category" element={<DeleteCategoryPage />} />
+
                 </Routes>
               </Layout>
             </ModalProvider>
