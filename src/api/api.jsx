@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: "$DROPBOX_TOKEN",
+    baseURL: "$URL_API",
 });
 
 export default api;
