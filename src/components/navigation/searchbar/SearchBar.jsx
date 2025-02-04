@@ -58,14 +58,16 @@ const SearchBar = () => {
 
     return (
         <form className="search-bar" onSubmit={handleSearch}>
-            <input
-                type="text"
-                className="form-control"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button type="submit" className="btn btn-primary">Search</button>
+            <div className="input-container">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Я шукаю..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button type="submit" className="btn search-btn">Шукати</button>
+            </div>
             {/* {filteredHistory.length > 0 && (
                 <ul className="suggestions-list">
                     {filteredHistory.map((item, index) => (

@@ -9,8 +9,11 @@ body {
 }
 
 :root {
-    --navar-color: #333;
-    --blue-color: #007bff;
-    --discount-color: rgba(255, 0, 0, 0.85);
-    --hover-btn-color: #6c757d;
+    --primary-color: #000000; /* Черный */
+    --secondary-color: #ffffff; /* Белый */
+    --accent-color: #ff3b30; /* Красный (для точки в "Point.") */
+    --gray-light: #d8d8d8; /* Светло-серый фон */
+    --gray-dark: #a0a0a0; /* Темно-серый текст */
+    --button-bg: #494949; /* Фон кнопок */
+    --button-text: #ffffff; /* Цвет текста на кнопках */
 }

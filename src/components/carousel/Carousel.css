@@ -1,6 +1,6 @@
 .carousel {
-    max-width: 1200px;
-    max-height: 400px;
+    max-width: 90vw;
+    max-height: 50vh;
     overflow: hidden;
    
 }

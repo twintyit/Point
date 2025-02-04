@@ -1,0 +1,11 @@
+.сategory-list-container{
+    overflow: hidden;
+
+}
+
+.category-card {
+    width: 11%; /* Фиксированная ширина карточки */
+    max-width: 13%; /* Чуть увеличиваем для удобства */
+    background-color: var(--gray-light);
+    border-radius: 40%;
+}

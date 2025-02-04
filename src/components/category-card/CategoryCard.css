@@ -1,0 +1,16 @@
+.card {
+    background-color: var(--gray-light) !important;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap; /* Предотвращает перенос текста */
+}
+
+.icon-card{
+    font-size: 40px;
+}
+
+.icon-card-container{
+    background-color: var(--gray-dark);
+    border-radius: 100%;
+
+}

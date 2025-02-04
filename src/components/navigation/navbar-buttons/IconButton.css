@@ -1,7 +1,7 @@
 .icon-button {
     background: transparent;
     border: none;
-    padding: 8px;
+    padding: 2px;
     display: flex;
     border-radius: 5%;
     align-items: center;
@@ -15,8 +15,8 @@
 }
 
 .icon {
-    color: #fff;
-    font-size: 25px;
+    color: var(--button-bg);
+    font-size: 50px;
 }
 
 .cart-button {

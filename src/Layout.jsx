@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
         <div className="app-layout">
             <Navbar />
             <div className="container-m">
-                <Sidebar isVisible={isSidebarVisible} mode={sidebarContent} />
+                {/*<Sidebar isVisible={isSidebarVisible} mode={sidebarContent} />*/}
                 <main className="content">
                     {children}
                 </main>

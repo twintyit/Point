@@ -8,15 +8,16 @@
     display: flex;
     flex: 1;
     overflow: hidden;
-    margin: 0 10%;
-    padding-top: 56px;
+    margin: 0;
+    padding-top: 20vh;
+    margin: 0 5%;
 }
 
 .content {
     flex: 1;
     padding: 1rem;
     background-color: #fff;
-    margin-left: 50px;
     overflow-y: auto;
+    width: 100%;
 }
 

@@ -4,3 +4,8 @@
     height: 100%;
 }
 
+.carousel-container{
+    width: 100%;
+    align-items: center;
+}
+
