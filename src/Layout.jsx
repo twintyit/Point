@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
 
     return (
         <div className="app-layout">
-            <Navbar />
+            <Navbar/>
             <div className="container-m">
                 {/*<Sidebar isVisible={isSidebarVisible} mode={sidebarContent} />*/}
                 <main className="content">
@@ -47,12 +47,12 @@ const Layout = ({ children }) => {
                 {state.showNotification && (
                     <Notification
                         message="Товар добавлен в корзину"
-                        onClose={()=> dispatch({ type: 'SHOW_NOTIFICATION', payload: false })}
-                        onOpenCart={()=> openModal(<UserCart></UserCart>)}
+                        onClose={() => dispatch({type: 'SHOW_NOTIFICATION', payload: false})}
+                        onOpenCart={() => openModal(<UserCart></UserCart>)}
                     />
                 )}
             </div>
-            <Footer />
+            <Footer/>
         </div>
     );
 };

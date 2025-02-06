@@ -1,11 +1,16 @@
-.сategory-list-container{
+.category-list-container{
     overflow: hidden;
+    padding: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    clip-path: inset(0);
 
 }
 
 .category-card {
     width: 11%; /* Фиксированная ширина карточки */
     max-width: 13%; /* Чуть увеличиваем для удобства */
-    background-color: var(--gray-light);
     border-radius: 40%;
+
 }
+

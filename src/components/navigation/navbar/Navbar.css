@@ -1,8 +1,10 @@
 .my-navbar {
+    background-color: white;
     color: var(--gray-dark);
     width: 100%;
     z-index: 1000;
     padding: 0;
+    padding-bottom: 20px;
 }
 
 .rectangle-top{
@@ -13,10 +15,17 @@
 
 .navbar-container{
     width: 100%;
+    align-items: center;
 }
 
 .navbar-bottom-container{
+    display: flex;
+    width: 90%;
     margin-top: 4vh;
+    justify-content: space-between;
+    height: 4rem;
+    /*position: sticky;*/
+    /*top: 0;*/
 }
 
 .navbar-icon {

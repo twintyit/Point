@@ -6,7 +6,7 @@ const Section = ({ title, children, flug }) => {
     return (
         <section className="mb-5 section-container">
             <div className=" section-container-top">
-                <h2 className="text-center ">{title}</h2>
+                <h2 className="text-center">{title}</h2>
                 { flug ?
                         ( <Link className="link-primary" to={"/"}>Дивитись всi</Link>)
                         :
@@ -14,7 +14,7 @@ const Section = ({ title, children, flug }) => {
                 }
 
             </div>
-            <div className="row">
+            <div>
                 {children}
             </div>
         </section>

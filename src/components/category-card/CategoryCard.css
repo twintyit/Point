@@ -2,7 +2,19 @@
     background-color: var(--gray-light) !important;
     width: 100%;
     height: 100%;
-    white-space: nowrap; /* Предотвращает перенос текста */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    border: none !important;
+    white-space: nowrap;
+    text-decoration: none;
+    transform-origin: center center;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.card:hover {
+    opacity: 0.8;
 }
 
 .icon-card{

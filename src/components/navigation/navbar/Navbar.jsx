@@ -15,9 +15,9 @@ const Navbar = () => {
                 <div className="rectangle-top">
                 </div>
 
-                <div className="d-flex navbar-bottom-container justify-content-center">
+                <div className=" navbar-bottom-container">
                     <div>
-                        <Link to="/"><img className="navbar-icon" src="/public/Logo.png" alt="Logo"/></Link>
+                        <Link to="/"><img className="navbar-icon" src="/Logo.png" alt="Logo"/></Link>
                     </div>
                     <SearchBar/>
                     <div className="navbar-links">

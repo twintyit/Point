@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import "./CategoryList.css"
 import {getCategories} from "../../api/apiFunctions.jsx";
 import CategoryCard from "../category-card/CategoryCard.jsx";
+import {Link} from "react-router-dom";
 
 const CategoryList = () => {
 
@@ -23,9 +24,9 @@ const CategoryList = () => {
 
 
     return (
-        <div className="d-flex justify-content-between gap-3 flex-nowrap сategory-list-container">
+        <div className="category-list-container">
             {visibleCategories && visibleCategories.map((category) => (
-                <div key={category.id} className="category-card flex-shrink-0">
+                <div key={category.id} className="category-card">
                     <CategoryCard category={category}/>
                 </div>
             ))}

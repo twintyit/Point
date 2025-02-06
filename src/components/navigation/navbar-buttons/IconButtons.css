@@ -1,6 +1,4 @@
 .icon-buttons {
     display: flex;
     gap: 15px;
-    position: relative;
-    right: -35%;
 }

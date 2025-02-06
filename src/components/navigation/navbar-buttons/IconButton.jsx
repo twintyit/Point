@@ -17,6 +17,7 @@ const IconButton = ({ icon, onClick, totalItems, title}) => {
                     <div className="cart-button">
                         <button className="icon-button" onClick={onClick} title={title}>
                             <i className="material-icons icon">{icon}</i>
+                            <p className="icon-text">{title}</p>
                         </button>
                     </div>
             )}
