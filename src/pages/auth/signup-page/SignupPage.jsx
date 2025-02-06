@@ -6,6 +6,8 @@ import "./SignupPage.css"
 const SignupPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -24,7 +26,8 @@ const SignupPage = () => {
             const response = await signup({
                 UserEmail: email,
                 UserPassword: password,
-                UserConfirmPassword: confirmPassword
+                UserConfirmPassword: confirmPassword,
+                UserName: username
             });
             localStorage.setItem('token', response.data);
             localStorage.setItem('email', email);
@@ -57,8 +60,8 @@ const SignupPage = () => {
                             type="text"
                             className="form-control border-0 border-bottom"
                             id="username"
-                            // value={username}
-                            // onChange={(e) => setUsername(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             placeholder=" "
                             required
                         />
