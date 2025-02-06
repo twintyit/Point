@@ -9,7 +9,7 @@ const CategoryCard = ({ category }) => {
     }, []);
 
     return (
-        <Link key={category.id} to={`/category/${category.id}`} className="card h-100 p-3">
+        <Link key={category.id} to={`/category/${category.id}`} className="card-category h-100 p-3">
 
                 <div className="icon-card-container d-flex align-content-center">
                     <i className="material-icons icon-card p-3">open_with</i>

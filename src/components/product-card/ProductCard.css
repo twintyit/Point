@@ -1,93 +1,122 @@
+/* Карточка продукта */
 .product-card {
-    display: flex;
-    flex-direction: column; /* Позволяет располагать элементы вертикально */
-    justify-content: space-between; /* Размещает элементы равномерно по высоте */
-    height: 100%; /* Устанавливаем 100% высоты родителя */
-    border: 1px solid #ddd; /* Добавляем границу */
-    border-radius: 0 !important; /* Сглаженные углы */
-    padding: 10px; /* Внутренние отступы */
-    transition: transform 0.2s;
-    margin: 0 !important;
-}
-
-.card-text.name{
-    min-height: 50px;
-}
-
-.card-img-top {
-    height: 200px;
-    object-fit: contain;
-    padding: 15px;
-    background-color: #f7f7f7;
-}
-
-.product-card .card-body {
-    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.product-card .card-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    min-height: 48px;  /* для контроля высоты */
-}
-
-.product-link {
+    align-items: center;
+    width: 100%;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: opacity 0.2s ease-in-out;
     text-decoration: none;
-    color: inherit;
 }
 
-.product-link:hover .product-card {
-    transform: scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
+/* Эффект при наведении: только прозрачность */
+.product-card:hover {
+    opacity: 0.8;
 }
 
+/* Контейнер для изображений */
+.img-container {
+    width: 100%;
+    height: 26vh; /* Одинаковая высота */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 1rem;
+}
 
-.product-card-price{
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинки обрезаются по контейнеру */
+}
+
+/* Тело карточки */
+.card-body {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+}
+
+/* Название продукта */
+.card-text.name {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+}
+
+/* Цены */
+.price-container {
+    display: flex;
+    align-items: center;
+}
+
+.original-price {
+    text-decoration: line-through !important;
+    color: gray;
+    font-size: 14px;
+}
+
+.discount-price {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.price {
+    font-size: 18px;
     font-weight: bold;
 }
 
-.original-price-product{
-    text-decoration: line-through;
-    font-size: 0.95rem;
+/* Кнопка добавления в корзину */
+.add-to-cart {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 5px;
+    padding: 7.5px 11px !important;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    width: 100% !important;
 }
 
-.price-product{
-    font-weight: 600;
-    font-size: 1.45rem;
+.add-to-cart:hover {
+    background: #333;
 }
 
-.discount-price-product{
-    font-size: 1.45rem;
-    color: var( --discount-color);
-    font-weight: 600;
+.card-star-rating{
+    margin-bottom: 1rem;
 }
 
-.discount-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: var( --discount-color);
-    color: white;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 40%;
+/* Адаптивность */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .img-container {
+        height: 160px;
+    }
+
+    .card-text.name {
+        font-size: 14px;
+    }
+
+    .discount-price, .price {
+        font-size: 16px;
+    }
 }
 
-.material-icons.cart-product-icon {
-    color: var(  --blue-color);
-    font-size: 27px;
-    padding: 2px;
-    border-radius: 10%;
-}
 
-.cart-product-icon:hover{
- background-color: #dddddd;
-}
 
 

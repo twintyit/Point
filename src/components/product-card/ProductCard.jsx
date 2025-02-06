@@ -4,53 +4,41 @@ import './ProductCard.css';
 
 const ProductCard = ({ product, onAddToCart }) => {
     return (
-        <Link to={`/product/${product.product.id}`} className="product-link">
+        <Link to={`/product/${product.product.id}`} className="text-decoration-none">
             <div className="card product-card">
-                {product.product.discount > 0 && (
-                    <div className="discount-badge">
-                        -{product.product.discount}%
-                    </div>
-                )}
-                <img src={product.product.images[0]} alt={product.product.name} className="card-img-top"/>
-                <div className="card-body flex-row">
-                    <div>
-                        <p className="card-text name">{`${product.product.name}`}</p>
-                        {product.product.discount ? (
-                            <div>
-                                <p className="card-text text-muted original-price-product">
-                                    {product.product.price.toLocaleString()} ₴
-                                </p>
-                                <p className="card-textred text-danger">
-                                    <span
-                                        className="discount-price-product">{Math.floor(product.product.price - (product.product.price * product.product.discount / 100)).toLocaleString()} </span>
-                                    ₴
-                                </p>
-                            </div>
-                        ) : (
-                            <div>
-                                <p className="card-text price-product">
-                                    {product.product.price.toLocaleString()} ₴
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                    <div className="d-flex justify-content-between align-items-end">
-                        <button
-                            className="btn"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onAddToCart(product);
-                            }}
-                        >
-                            <i className="material-icons cart-product-icon">shopping_cart</i>
+                <div className="img-container">
+                    <img src={product.product.images[0]} alt={product.product.name} className="card-img-top"/>
+                </div>
 
-                        </button>
-                    </div>
+                <div className="card-body">
+                    <p className="card-text name">{product.product.name}</p>
+
+                    {product.product.discount ? (
+                        <div className="price-container">
+                            <p className="discount-price">
+                                ₴{Math.floor(product.product.price - (product.product.price * product.product.discount / 100)).toLocaleString()}
+                            </p>
+                            <p className="original-price">₴{product.product.price.toLocaleString()}</p>
+
+                        </div>
+                    ) : (
+                        <p className="price">{product.product.price.toLocaleString()} ₴</p>
+                    )}
+
+                    <div className="card-star-rating">Оценка товара</div>
+                    <button
+                        className="btn add-to-cart "
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onAddToCart(product);
+                        }}
+                    >
+                       Add to Cart
+                    </button>
                 </div>
             </div>
         </Link>
-    )
-        ;
+    );
 };
 
 export default ProductCard;

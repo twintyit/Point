@@ -1,0 +1,50 @@
+.product-showcase-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 товаров в ряд */
+    gap: 15px;
+    justify-content: center;
+}
+
+.product-grid {
+    width: 100%;
+}
+
+/* Убираем 6-й товар */
+@media (max-width: 992px) {
+    .product-showcase-container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    .product-showcase-container .product-grid:nth-child(6) {
+        display: none;
+    }
+}
+
+/* Оставляем 4 товара */
+@media (max-width: 768px) {
+    .product-showcase-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .product-showcase-container .product-grid:nth-child(5) {
+        display: none;
+    }
+}
+
+/* Оставляем 3 товара */
+@media (max-width: 576px) {
+    .product-showcase-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .product-showcase-container .product-grid:nth-child(4) {
+        display: none;
+    }
+}
+
+/* Оставляем 2 товара */
+@media (max-width: 400px) {
+    .product-showcase-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .product-showcase-container .product-grid:nth-child(3) {
+        display: none;
+    }
+}
