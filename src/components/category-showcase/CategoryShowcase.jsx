@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
-import "./CategoryList.css"
+import "./CategoryShowcase.css"
 import {getCategories} from "../../api/apiFunctions.jsx";
 import CategoryCard from "../category-card/CategoryCard.jsx";
-import {Link} from "react-router-dom";
 
-const CategoryList = () => {
+const CategoryShowcase = () => {
 
     const [categories,setCategories] = useState([]);
     const [visibleCategories, setVisibleCategories] = useState([]);
@@ -34,4 +33,4 @@ const CategoryList = () => {
     );
 };
 
-export default CategoryList;
+export default CategoryShowcase;

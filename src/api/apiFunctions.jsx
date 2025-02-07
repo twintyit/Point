@@ -108,6 +108,13 @@ export const editCategory = async (data, token) => {
         .send();
 };
 
+export const addCategory = async (data) => {
+    return await new RequestBuilder('post', '/prod/createcategory')
+        .setData(data)
+        .send();
+};
+
+
 // export const signup = async (userData) => {
 //     return await makeRequest('post', '/auth/signup', userData);
 // };

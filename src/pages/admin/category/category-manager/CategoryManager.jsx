@@ -21,6 +21,10 @@ const CategoryManager = () => {
 
     return   <>
         {category.length > 0 && (
+            <div>
+            <div>
+                <Link className="btn btn-success" to={`/admin/add-category`}>Добавить категорию</Link>
+            </div>
             <div className="d-flex flex-column">
                 <div className="d-flex border-bottom p-2 fw-bold">
                     <div className="col-6">Название категории</div>
@@ -28,7 +32,7 @@ const CategoryManager = () => {
                 </div>
                 {category.map((category, index) => (
                     <div key={index} className="d-flex border-bottom p-2 align-items-center">
-                        <div className="col-6">{category.name}</div>
+                        <div className="col-6">{category.title}</div>
                         <div className="col-6 d-flex">
                             <button
                                 className="btn btn-danger me-2"
@@ -64,7 +68,9 @@ const CategoryManager = () => {
                     </div>
                 ))}
             </div>
+            </div>
         )}
+
     </>
 }
 

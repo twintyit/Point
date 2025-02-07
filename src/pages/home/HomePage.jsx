@@ -3,8 +3,10 @@ import Carousel from '../../components/carousel/Carousel';
 import ProductList from '../../components/product-list/ProductList.jsx';
 import './HomePage.css';
 import Section from "../../components/section/Section.jsx";
-import CategoryList from "../../components/category-list/CategoryList.jsx";
+import CategoryShowcase from "../../components/category-showcase/CategoryShowcase.jsx";
 import ProductShowcase from "../../components/product-showcase/ProductShowcase.jsx";
+import ImagesShowcase from "../../components/images-showcase/ImagesShowcase.jsx";
+import BrandsShowcase from "../../components/brands-showcase/BrandsShowcase.jsx";
 
 const HomePage = () => {
     return (
@@ -14,17 +16,18 @@ const HomePage = () => {
                 </div>
                 <div className="home-container-bottom">
                    <Section title="Категорії" flug={false}>
-                       <CategoryList />
+                       <CategoryShowcase />
                    </Section>
                     <Section title="Акційні пропозиції" flug={true}>
                         <ProductShowcase />
                     </Section>
                     <Section title="Популярні бренди" flug={false}>
-                        <CategoryList />
+                        <BrandsShowcase />
                     </Section>
                     <Section title="Лідери продаж" flug={true}>
                         <ProductShowcase />
                     </Section>
+                    <ImagesShowcase></ImagesShowcase>
                     <Section title="Новинки" flug={true}>
                         <ProductShowcase />
                     </Section>

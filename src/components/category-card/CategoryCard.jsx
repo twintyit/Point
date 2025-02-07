@@ -15,8 +15,8 @@ const CategoryCard = ({ category }) => {
                     <i className="material-icons icon-card p-3">open_with</i>
                 </div>
 
-                <h6 className="text-wrap text-center mt-3">{category.name}</h6>
-                <div className="tmp"></div>
+                <h6 className="text-category text-wrap text-center mt-3">{category.title}</h6>
+
         </Link>
     );
 };

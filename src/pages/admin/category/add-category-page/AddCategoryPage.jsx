@@ -1,44 +1,45 @@
 import React, {useState} from 'react';
-
-import './AddCategoryPage.css';
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
+import './AddCategoryPage.css';
+import {addCategory} from "../../../../api/apiFunctions.jsx";
 
 const AddCategoryPage  = () => {
     const {authState} = useAuth();
-    const [name, setName] = useState("");
+    const [title, setTitle] = useState("");
     const [slug, setSlug] = useState("");
-    const [description, setDescription] = useState("");
-    const [images, setImages] = useState([]);
+    const [image, setImage] = useState([]);
 
-    const handleFileChange = (event) => {
-        setImages(event.target.files);
-    };
+    // const handleFileChange = (event) => {
+    //     setImage(event.target.files);
+    // };
 
     async function submitCategory() {
-        const formData = new FormData();
-        formData.append("name", name); // Изменено на маленькие буквы
-        formData.append("slug", slug || ""); // Изменено на маленькие буквы
-        formData.append("description", description); // Изменено на маленькие буквы
+        // const formData = new FormData();
+        // formData.append("title", title); // Изменено на маленькие буквы
+        // formData.append("slug", slug || ""); // Изменено на маленькие буквы
+        // formData.append("image", image); // Изменено на маленькие буквы
+        //
+        // try {
+        //     const response = await fetch("https://shnurok.azurewebsites.net/api/prod/createcategory", {
+        //         method: "POST",
+        //         headers: {
+        //             'Authorization': authState.token,
+        //
+        //         },
+        //         body: formData,
+        //     });
+        //
+        //
+        //     console.log(response);
+        //     if (!response.ok) throw new Error("Ошибка при отправке формы");
+        //
+        //     const result = await response.json();
+        //     console.log("Ответ сервера:", result);
+        // } catch (error) {
+        //     console.error("Ошибка:", error);
+        // }
 
-        Array.from(images).forEach((image) => formData.append("images", image)); // Изменено на маленькие буквы
-
-        try {
-            const response = await fetch("https://shnurok.azurewebsites.net/api/prod/createcategories", {
-                method: "POST",
-                headers: {
-                    'Authorization': authState.token,
-
-                },
-                body: formData,
-            });
-
-            if (!response.ok) throw new Error("Ошибка при отправке формы");
-
-            const result = await response.json();
-            console.log("Ответ сервера:", result);
-        } catch (error) {
-            console.error("Ошибка:", error);
-        }
+        await addCategory({title, slug, image}, authState.token);
     }
 
     return (
@@ -53,14 +54,14 @@ const AddCategoryPage  = () => {
             }}
         >
             <div className="form-group">
-                <label htmlFor="name">Название категории:</label>
+                <label htmlFor="title">Название категории:</label>
                 <input
                     type="text"
                     className="form-control"
-                    id="name"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    id="title"
+                    name="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     required
                 />
             </div>
@@ -78,28 +79,26 @@ const AddCategoryPage  = () => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="description">Описание:</label>
-                <textarea
-                    className="form-control"
-                    id="description"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                ></textarea>
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="images">Изображения:</label>
+                <label htmlFor="image">Изображение:</label>
                 <input
-                    type="file"
-                    className="form-control-file"
-                    id="images"
-                    name="images"
-                    multiple
-                    onChange={handleFileChange}
+                    type="text"
+                    className="form-control"
+                    id="image"
+                    name="image"
+                    onChange={(e) => setImage(e.target.value)}
                 />
             </div>
+
+            {/*<div className="form-group">*/}
+            {/*    <label htmlFor="image">Изображение:</label>*/}
+            {/*    <input*/}
+            {/*        type="file"*/}
+            {/*        className="form-control-file"*/}
+            {/*        id="image"*/}
+            {/*        name="image"*/}
+            {/*        onChange={handleFileChange}*/}
+            {/*    />*/}
+            {/*</div>*/}
 
             <button type="submit" className="btn btn-primary mt-3">Создать категорию</button>
         </form>
@@ -107,4 +106,4 @@ const AddCategoryPage  = () => {
 };
 
 
-export default AddCategoryPage ;
+export default AddCategoryPage;

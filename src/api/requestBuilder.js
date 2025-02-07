@@ -30,7 +30,7 @@ export default class RequestBuilder {
     }
 
     setToken(token) {
-        this.setHeader('Authorization', `${token}`);
+        this.setHeader('Authorization', `Bearer ${token}`);
         return this;
     }
 
@@ -68,8 +68,9 @@ export default class RequestBuilder {
                     ? await api.get(this.url, config)
                     : await api[this.method](this.url, preparedData, config);
 
-            if (response.data.status && response.data.status.code !== 0) {
-                throw new Error(`Ошибка: ${handleErrors(response.data.status.code)}`);
+            console.log(response);
+            if (response.data.status > 200 && response.data.status < 300) {
+                throw new Error(`Ошибка: ${handleErrors(response.data.status)}`);
             }
 
             return response.data;

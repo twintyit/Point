@@ -8,11 +8,16 @@
     align-items: center;
     border: none !important;
     white-space: nowrap;
-    text-decoration: none;
+    text-decoration: none !important;
     transform-origin: center center;
     transition: opacity 0.1s ease-in-out;
+    border-radius: 5%;
+    color: black;
 }
 
+.card-category a{
+    background-color: transparent;
+}
 .card-category:hover {
     opacity: 0.8;
 }
@@ -24,5 +29,4 @@
 .icon-card-container{
     background-color: var(--gray-dark);
     border-radius: 100%;
-
 }
