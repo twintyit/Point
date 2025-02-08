@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductDetails } from '../../api/apiFunctions';
+import { getProductDetails } from '../../services/apiService.js';
 import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
 import './ProductDetail.css'
 import {useCart} from "../../contexts/CartContext.jsx";

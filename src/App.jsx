@@ -16,7 +16,7 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 import { AuthProvider } from './contexts/AuthContext';
 
 import './App.css';
-import AddProductPage from "./pages/admin/add-product-page/AddProductPage.jsx";
+import AddProductPage from "./pages/admin/product/add-product-page/AddProductPage.jsx";
 import AddCategoryPage from "./pages/admin/category/add-category-page/AddCategoryPage.jsx";
 import AdminPanel from "./pages/admin/admin-panel/AdminPanel.jsx";
 import CategoryManager from "./pages/admin/category/category-manager/CategoryManager.jsx";

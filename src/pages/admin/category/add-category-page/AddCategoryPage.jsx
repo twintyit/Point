@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
+import {addCategory} from "../../../../services/apiService.js";
+import alertService from "../../../../services/alertService.js";
 import './AddCategoryPage.css';
-import {addCategory} from "../../../../api/apiFunctions.jsx";
 
 const AddCategoryPage  = () => {
     const {authState} = useAuth();
@@ -9,37 +10,20 @@ const AddCategoryPage  = () => {
     const [slug, setSlug] = useState("");
     const [image, setImage] = useState([]);
 
-    // const handleFileChange = (event) => {
-    //     setImage(event.target.files);
-    // };
-
     async function submitCategory() {
-        // const formData = new FormData();
-        // formData.append("title", title); // Изменено на маленькие буквы
-        // formData.append("slug", slug || ""); // Изменено на маленькие буквы
-        // formData.append("image", image); // Изменено на маленькие буквы
-        //
-        // try {
-        //     const response = await fetch("https://shnurok.azurewebsites.net/api/prod/createcategory", {
-        //         method: "POST",
-        //         headers: {
-        //             'Authorization': authState.token,
-        //
-        //         },
-        //         body: formData,
-        //     });
-        //
-        //
-        //     console.log(response);
-        //     if (!response.ok) throw new Error("Ошибка при отправке формы");
-        //
-        //     const result = await response.json();
-        //     console.log("Ответ сервера:", result);
-        // } catch (error) {
-        //     console.error("Ошибка:", error);
-        // }
+        const formData = new FormData();
+        formData.append("Title", title);
+        formData.append("Slug", slug || title);
+        if (image) {
+            formData.append("Image", image);
+        }
 
-        await addCategory({title, slug, image}, authState.token);
+        try {
+            addCategory(formData, authState.token);
+            alertService.success("Категория добавлена!");
+        } catch (error) {
+            alertService.error("Ошибка при добавлении категории");
+        }
     }
 
     return (
@@ -81,24 +65,13 @@ const AddCategoryPage  = () => {
             <div className="form-group">
                 <label htmlFor="image">Изображение:</label>
                 <input
-                    type="text"
-                    className="form-control"
+                    type="file"
+                    className="form-control-file"
                     id="image"
                     name="image"
-                    onChange={(e) => setImage(e.target.value)}
+                    onChange={(e)=>  setImage(e.target.files[0])}
                 />
             </div>
-
-            {/*<div className="form-group">*/}
-            {/*    <label htmlFor="image">Изображение:</label>*/}
-            {/*    <input*/}
-            {/*        type="file"*/}
-            {/*        className="form-control-file"*/}
-            {/*        id="image"*/}
-            {/*        name="image"*/}
-            {/*        onChange={handleFileChange}*/}
-            {/*    />*/}
-            {/*</div>*/}
 
             <button type="submit" className="btn btn-primary mt-3">Создать категорию</button>
         </form>

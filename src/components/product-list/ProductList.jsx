@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getCategoryProducts, getAllProducts } from '../../api/apiFunctions.jsx';
+import { getCategoryProducts, getAllProducts } from '../../services/apiService.js';
 import ProductCard from '../product-card/ProductCard.jsx';
 import { useCart } from '../../contexts/CartContext.jsx';
-import { searchProduct } from '../../api/apiFunctions.jsx';
+import { searchProduct } from '../../services/apiService.js';
 import "./ProductList.css"
 
 const ProductList = ({ categoryId, searchedProduct }) => {

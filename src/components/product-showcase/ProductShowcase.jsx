@@ -1,7 +1,7 @@
 import ProductCard from "../product-card/ProductCard.jsx";
 import React, {useEffect, useState} from "react";
 import {useCart} from "../../contexts/CartContext.jsx";
-import {getAllProducts, getCategoryProducts, searchProduct} from "../../api/apiFunctions.jsx";
+import {getAllProducts, getCategoryProducts, searchProduct} from "../../services/apiService.js";
 import "./ProductShowcase.css"
 
 const ProductShowcase = ({fetchFunction}) => {

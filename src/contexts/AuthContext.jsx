@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useReducer} from 'react';
-import { login, logout } from '../api/apiFunctions';
+import { login, logout } from '../services/apiService.js';
 import { useNavigate } from 'react-router-dom';
 import {authReducer, initialState} from "../reducer/AuthReducer.jsx";
 

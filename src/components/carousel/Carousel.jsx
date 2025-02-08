@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getSaleImages } from '../../api/apiFunctions';
+import { getSaleImages } from '../../services/apiService.js';
 import './Carousel.css'
 
 const Carousel = () => {

@@ -7,9 +7,9 @@ const AdminPanel = () => {
     return (
         <div className="container">
             <div>
-                <button className="btn btn-outline-info"  onClick={() => navigate('/admin/category')}>Категории
+                <button className="btn btn-primary"  onClick={() => navigate('/admin/category')}>Категории
                 </button>
-                <button className="btn btn-outline-info" onClick={() => navigate('/admin/product')}>Продукты
+                <button className="btn btn-primary" onClick={() => navigate('/admin/product')}>Продукты
                 </button>
 
 

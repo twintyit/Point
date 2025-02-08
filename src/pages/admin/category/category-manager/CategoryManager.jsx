@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import Swal from "sweetalert2";
-import {deleteCategory, getCategories} from "../../../../api/apiFunctions.jsx";
+import { deleteCategory, getCategories} from "../../../../services/apiService.js";
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
 import {Link} from "react-router-dom";
+import alertService from "../../../../services/alertService.js";
 
 const CategoryManager = () => {
 
@@ -16,13 +16,24 @@ const CategoryManager = () => {
                 .catch((error) => {console.error(error)});
         }
         res();
-    },[])
+    },[]);
 
+    const onDeleteCategoryButtonClick = async () => {
+        const shouldDelete = await alertService.confirmDelete();
+        if (shouldDelete) {
+            try {
+                await deleteCategory(authState.token, category.id);
+                alertService.success("Категория удалена!");
+            } catch (error) {
+                alertService.error("Ошибка при удалении категории");
+            }
+        }
+    }
 
     return   <>
         {category.length > 0 && (
             <div>
-            <div>
+            <div className="d-flex justify-content-center">
                 <Link className="btn btn-success" to={`/admin/add-category`}>Добавить категорию</Link>
             </div>
             <div className="d-flex flex-column">
@@ -36,30 +47,7 @@ const CategoryManager = () => {
                         <div className="col-6 d-flex">
                             <button
                                 className="btn btn-danger me-2"
-                                onClick={() => {
-                                    Swal.fire({
-                                        title: 'Вы уверены?',
-                                        text: "Это действие нельзя будет отменить!",
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#d33',
-                                        cancelButtonColor: '#3085d6',
-                                        confirmButtonText: 'Да, удалить!',
-                                        cancelButtonText: 'Отмена'
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            deleteCategory(authState.token, category.id)
-                                                .then((response) => {
-                                                    console.log(response);
-                                                    Swal.fire('Удалено!', 'Категория была успешно удалена.', 'success');
-                                                })
-                                                .catch((error) => {
-                                                    console.error(error);
-                                                    Swal.fire('Ошибка', 'Не удалось удалить категорию.', 'error');
-                                                });
-                                        }
-                                    });
-                                }}
+                                onClick={onDeleteCategoryButtonClick}
                             >
                                 Удалить
                             </button>

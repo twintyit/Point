@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../components/navigation/breadcrumbs/Breadcrumbs.jsx';
 import ProductList from '../../components/product-list/ProductList.jsx';
-import { getCategoryProducts, getCategoryName } from '../../api/apiFunctions.jsx';
+import { getCategoryProducts, getCategoryById } from '../../services/apiService.js';
 
 const CategoryPage = () => {
     const { categoryId } = useParams();
@@ -13,7 +13,7 @@ const CategoryPage = () => {
         const fetchCategoryData = async () => {
             try {
                 const productsResponse = await getCategoryProducts(categoryId);
-                const categoryNameResponse = await getCategoryName(categoryId);
+                const categoryNameResponse = await getCategoryById(categoryId);
                 console.log(categoryNameResponse)
                 setProducts(productsResponse.data);
                 setCategoryName(categoryNameResponse.data.name);

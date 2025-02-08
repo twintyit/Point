@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./CategoryShowcase.css"
-import {getCategories} from "../../api/apiFunctions.jsx";
+import {getCategories} from "../../services/apiService.js";
 import CategoryCard from "../category-card/CategoryCard.jsx";
 
 const CategoryShowcase = () => {

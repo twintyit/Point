@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { useAuth } from './AuthContext'
-import { addItemToCart, getCart, cleanCart, removeItemFromCart, deleteItemFromCart } from '../api/apiFunctions';
+import { addItemToCart, getCart, cleanCart, removeItemFromCart, deleteItemFromCart } from '../services/apiService.js';
 import {cartReducer, initialCartState} from "../reducer/CartReducer.jsx";
 
 const CartContext = createContext();
