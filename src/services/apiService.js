@@ -113,16 +113,20 @@ export const repeatOrder = async (token, data) => {
 };
 
 export const deleteCategory = async (token, id) => {
-    return await new RequestService('post', '/prod/deletecategory')
-        .setData({ id })
+    return await new RequestService('delete', `/prod/categorydelete/${id}`)
         .setToken(token)
         .handleRequest();
 };
 
-export const editCategory = async (data, token) => {
-    return await new RequestService('post', '/prod/updatecategory')
+export const editCategory = async (id, data, token) => {
+    return await new RequestService('put', `/prod/categoryupdate/${id}`)
         .setFormData(data)
         .setToken(token)
+        .handleRequest();
+};
+
+export const getDeletedCategorys = async () => {
+    return await new RequestService('get', '/prod/deleted-categories')
         .handleRequest();
 };
 

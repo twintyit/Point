@@ -28,30 +28,13 @@ const CategoryEditForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log()
-
-        console.log("Category object:", category);
-        console.log("Images array:", images);
 
         const formData = new FormData();
 
-        // Проверяем и добавляем данные в FormData
-        if (category.id) {
-            formData.append('categoryId', categoryId);
+        if (category.title) {
+            formData.append('Title', category.title);
         } else {
-            console.error("category.id is missing");
-        }
-
-        if (category.name) {
-            formData.append('Name', category.name);
-        } else {
-            console.error("category.name is missing");
-        }
-
-        if (category.description) {
-            formData.append('Description', category.description);
-        } else {
-            console.error("category.description is missing");
+            console.error("category.title is missing");
         }
 
         if (category.slug) {
@@ -61,20 +44,11 @@ const CategoryEditForm = () => {
             formData.append('Slug', "");
         }
 
-        // Добавляем изображения в FormData
-
         console.log(images[0])
-        for (let i = 0; i < images.length; i++) {
-           formData.append('Images', images[i]);
-        }
-
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ": " + pair[1]);
-        }
 
         try {
             if(formData){
-                await editCategory(formData, authState.token);
+                await editCategory(categoryId, formData, authState.token);
                 alertService.success();
             }else {
                 alertService.error("Заполните корректно данные");
@@ -97,7 +71,7 @@ const CategoryEditForm = () => {
                     onChange={(e) => {
                         setCategory(prevCategory => ({
                             ...prevCategory,
-                            ["name"]: e.target.value
+                            ["title"]: e.target.value
                         }));
                     }}
                     placeholder="Введите название категории"
