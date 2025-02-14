@@ -17,7 +17,7 @@ const Navbar = () => {
 
                 <div className=" navbar-bottom-container">
                     <div>
-                        <Link to="/"><img className="navbar-icon" src="/Logo.png" alt="Logo"/></Link>
+                        <Link to="/"><img className="navbar-icon" src="/Logo-big.png" alt="Logo"/></Link>
                     </div>
                     <SearchBar/>
                     <div className="navbar-links">

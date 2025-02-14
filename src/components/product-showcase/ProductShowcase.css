@@ -9,7 +9,6 @@
     width: 100%;
 }
 
-/* Убираем 6-й товар */
 @media (max-width: 992px) {
     .product-showcase-container {
         grid-template-columns: repeat(5, 1fr);
@@ -19,7 +18,6 @@
     }
 }
 
-/* Оставляем 4 товара */
 @media (max-width: 768px) {
     .product-showcase-container {
         grid-template-columns: repeat(4, 1fr);

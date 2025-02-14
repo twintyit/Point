@@ -17,7 +17,7 @@ export const getAllProducts = async () => {
         .handleRequest();
 };
 
-export const getCategories = async () => {
+export const getAllCategories = async () => {
     return await new RequestService('get', '/prod/categories')
         .handleRequest();
 };
@@ -43,7 +43,8 @@ export const getCategoryById = async (categoryId) => {
 };
 
 export const logout = async (token) => {
-    return await new RequestService('post', '/auth/logout').setToken(token)
+    return await new RequestService('post', '/auth/logout')
+        .setToken(token)
         .handleRequest();
 };
 
@@ -113,26 +114,62 @@ export const repeatOrder = async (token, data) => {
 };
 
 export const deleteCategory = async (token, id) => {
-    return await new RequestService('delete', `/prod/categorydelete/${id}`)
+    return await new RequestService('delete', `/prod/categories/${id}`)
         .setToken(token)
         .handleRequest();
 };
 
-export const editCategory = async (id, data, token) => {
+export const updateCategory = async (id, data, token) => {
     return await new RequestService('put', `/prod/categoryupdate/${id}`)
         .setFormData(data)
         .setToken(token)
         .handleRequest();
 };
 
-export const getDeletedCategorys = async () => {
-    return await new RequestService('get', '/prod/deleted-categories')
+export const getDeletedCategories = async () => {
+    return await new RequestService('get', '/prod/categories/deleted')
         .handleRequest();
 };
 
-export const addCategory = async (data, token) => {
-    return await new RequestService('post', '/prod/createcategory')
+export const createCategory = async (data, token) => {
+    return await new RequestService('post', '/prod/categories')
         .setFormData(data)
         .setToken(token)
         .handleRequest();
 };
+
+export const getAllSybCategories = async () => {
+    return await new RequestService('get', `/prod/subcategories`)
+        .handleRequest();
+};
+
+export const getSubcategoryById = async (id) => {
+    return await new RequestService('get', `/prod/subcategories/${id}`)
+        .handleRequest();
+};
+
+export const deleteSubcategoryById = async (id, token) => {
+    return await new RequestService('delete', `/prod/subcategories/${id}`)
+        .setToken(token)
+        .handleRequest();
+};
+
+export const createSubcategory = async (data, token) => {
+    return await new RequestService('post', `/prod/subcategories`)
+        .setFormData(data)
+        .setToken(token)
+        .handleRequest();
+};
+
+export const updateSubcategoryById = async (id, data, token) => {
+    return await new RequestService('put', `/prod/subcategories/${id}`)
+        .setFormData(data)
+        .setToken(token)
+        .handleRequest();
+};
+
+export const getSubcategoriesByCategoryId = async (id) => {
+    return await new RequestService('get', `/prod/categories/${id}/subcategories`)
+        .handleRequest();
+};
+

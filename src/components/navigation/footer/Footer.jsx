@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="row">
 
                     <div className="col-md-3">
-                        <img src="/Logo.png" className="footer-logo pb-3" />
+                        <img src="/Logo-big.png" className="footer-logo pb-3" />
                         <p>Your one-stop marketplace for all your needs.</p>
                         <div className="d-flex gap-3">
                             <a href="#"><i className="bi bi-facebook"></i></a>

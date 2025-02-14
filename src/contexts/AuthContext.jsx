@@ -15,31 +15,37 @@ export const AuthProvider = ({ children }) => {
     const [authState, dispatch] = useReducer(authReducer, initialState);
 
     const loginUser = async (email, password) => {
-        const response = await login({
-            UserEmail: email,
-            UserPassword: password,
-        });
+        try{
+            const data = await login({
+                UserEmail: email,
+                UserPassword: password,
+            });
 
-        if (response.status.code === 0) {
-            const token = response.data;
+            const token = data.token;
             localStorage.setItem('token', token);
             localStorage.setItem('user', email);
             dispatch({
                 type: 'LOGIN',
                 payload: { userName: email, token },
             });
+        }catch (error){
+            console.error(error);
         }
+
+
     };
 
     const logoutUser = async (redirectTo) => {
-        const res = await logout(authState.token);
-
-        if (res.status.code === 0) {
+        try {
+            await logout(authState.token);
             localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            localStorage.removeItem('email');
             localStorage.setItem('cart', JSON.stringify([]));
             dispatch({ type: 'LOGOUT' });
             navigate(redirectTo);
+        }
+        catch (error){
+            console.error(error);
         }
     };
 

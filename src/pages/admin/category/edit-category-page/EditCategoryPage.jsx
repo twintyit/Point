@@ -1,60 +1,78 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
-import {editCategory, getCategoryById, getCategoryProducts} from "../../../../services/apiService.js";
-import {useAuth} from "../../../../contexts/AuthContext.jsx";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import {Link, useParams} from "react-router-dom";
+import {
+    updateCategory,
+    getCategoryById,
+    getSubcategoriesByCategoryId,
+    deleteSubcategoryById
+} from "../../../../services/apiService.js";
+import { useAuth } from "../../../../contexts/AuthContext.jsx";
 import alertService from "../../../../services/alertService.js";
 
-
-const CategoryEditForm = () => {
-
-    const {categoryId} = useParams();
-    const {authState} = useAuth();
-    const [category, setCategory] = useState({});
-    const [images, setImages] = useState([]);
+const EditCategoryPage = () => {
+    const { categoryId } = useParams();
+    const { authState } = useAuth();
+    const [category, setCategory] = useState({ title: "", slug: "", subcategories: [] });
+    const [subcategories, setSubcategories] = useState([]);
+    const [selectedSubcategory, setSelectedSubcategory] = useState("");
+    const [image, setImage] = useState(null);
+    const [dataDeleted, setDataDeleted] = React.useState(false);
 
     useEffect(() => {
-        const fetchCategoryData = async () => {
+        const fetchData = async () => {
             try {
-                const res = await getCategoryById(categoryId);
-                setCategory(res.data);
+                const categoryData = await getCategoryById(categoryId);
+                setCategory(categoryData);
             } catch (error) {
-                alertService.error();
+               console.log(error)
             }
         };
 
-        fetchCategoryData();
-    },[categoryId])
+        fetchData();
+    }, [categoryId]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const subcategoriesData = await getSubcategoriesByCategoryId(categoryId);
+                setSubcategories(subcategoriesData);
+            } catch (error) {
+                console.log(error)
+            }
+        };
+
+        fetchData();
+    }, [categoryId, dataDeleted]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const formData = new FormData();
 
-        if (category.title) {
-            formData.append('Title', category.title);
-        } else {
-            console.error("category.title is missing");
-        }
-
-        if (category.slug) {
-            formData.append('Slug', category.slug);
-        } else {
-            console.warn("Slug is empty, defaulting to an empty string");
-            formData.append('Slug', "");
-        }
-
-        console.log(images[0])
+        if (category.title) formData.append('Title', category.title);
+        if (category.slug) formData.append('Slug', category.slug);
+        if (image) formData.append('Image', image);
 
         try {
-            if(formData){
-                await editCategory(categoryId, formData, authState.token);
-                alertService.success();
-            }else {
-                alertService.error("Заполните корректно данные");
-            }
+            await updateCategory(categoryId, formData, authState.token);
+            alertService.success("Категория успешно обновлена!");
         } catch (error) {
-           alertService.error("Что-то пошло не так. Пожалуйста, попробуйте еще раз.");
+            alertService.error("Ошибка при обновлении категории");
+        }
+    };
+
+    const handleDeleteSubcategory = async () => {
+        if (!selectedSubcategory) return;
+        const isConfirmed = await alertService.confirmDelete("Вы точно хотите удалить подкатегорию?");
+        if (!isConfirmed) return;
+
+        try {
+            await deleteSubcategoryById(selectedSubcategory, authState.token);
+            setDataDeleted(!dataDeleted);
+            setSelectedSubcategory("");
+            alertService.success("Подкатегория удалена");
+
+        } catch (error) {
+            alertService.error("Ошибка при удалении подкатегории");
         }
     };
 
@@ -66,14 +84,8 @@ const CategoryEditForm = () => {
                 <label className="form-label">Название категории:</label>
                 <input
                     type="text"
-                    name="name"
                     value={category.title || ""}
-                    onChange={(e) => {
-                        setCategory(prevCategory => ({
-                            ...prevCategory,
-                            ["title"]: e.target.value
-                        }));
-                    }}
+                    onChange={(e) => setCategory({ ...category, title: e.target.value })}
                     placeholder="Введите название категории"
                     className="form-control"
                 />
@@ -83,27 +95,49 @@ const CategoryEditForm = () => {
                 <label className="form-label">Slug:</label>
                 <input
                     type="text"
-                    name="slug"
                     value={category.slug || ""}
-                    onChange={(e) => {
-                        setCategory(prevCategory => ({
-                            ...prevCategory,
-                            ["slug"]: e.target.value
-                        }));
-                    }}
+                    onChange={(e) => setCategory({ ...category, slug: e.target.value })}
                     placeholder="Введите Slug категории"
                     className="form-control"
                 />
             </div>
 
             <div className="mb-4">
+                <label className="form-label">Подкатегории:</label>
+                <select className="form-control" value={selectedSubcategory}
+                        onChange={(e) => setSelectedSubcategory(e.target.value)}>
+                    <option value="" disabled>Выберите подкатегорию</option>
+                    {subcategories.map(sub => (
+                        <option key={sub.id} value={sub.id}>{sub.title}</option>
+                    ))}
+                </select>
+                <button
+                    className="btn btn-sm btn-danger mt-2"
+                    type="button"
+                    onClick={handleDeleteSubcategory}
+                    disabled={!selectedSubcategory}
+                >
+                    Удалить
+                </button>
+
+                <Link
+                    className="btn btn-sm btn-warning mt-2"
+                    type="button"
+                    to={`/admin/edit-subcategory/${selectedSubcategory}`}
+                    style={{
+                        pointerEvents: selectedSubcategory ? 'auto' : 'none',
+                        opacity: selectedSubcategory ? 1 : 0.5
+                    }}
+                >
+                    Редактировать
+                </Link>
+            </div>
+
+            <div className="mb-4">
                 <label className="form-label">Изображения:</label>
                 <input
                     type="file"
-                    onChange={(e)=> {
-                        setImages(e.target.files);
-                    }}
-                    multiple
+                    onChange={(e) => setImage(e.target.files[0])}
                     accept="image/*"
                     className="form-control"
                 />
@@ -114,4 +148,4 @@ const CategoryEditForm = () => {
     );
 };
 
-export default CategoryEditForm;
+export default EditCategoryPage;

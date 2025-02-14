@@ -17,10 +17,12 @@ import { AuthProvider } from './contexts/AuthContext';
 
 import './App.css';
 import AddProductPage from "./pages/admin/product/add-product-page/AddProductPage.jsx";
-import AddCategoryPage from "./pages/admin/category/add-category-page/AddCategoryPage.jsx";
+import CreateCategoryPage from "./pages/admin/category/create-category-page/CreateCategoryPage.jsx";
 import AdminPanel from "./pages/admin/admin-panel/AdminPanel.jsx";
 import CategoryManager from "./pages/admin/category/category-manager/CategoryManager.jsx";
 import EditCategoryPage from "./pages/admin/category/edit-category-page/EditCategoryPage.jsx";
+import CreateSubcategoryPage from "./pages/admin/subcategory/create-subcategory-page/CreateSubcategoryPage.jsx";
+import EditSubcategoryPage from "./pages/admin/subcategory/edit-subcategory-page/EditSubcategoryPage.jsx";
 
 function App() {
   
@@ -45,10 +47,13 @@ function App() {
                     <Route path="/admin" element={<AdminPanel />} />
                     <Route path="/admin/category" element={<CategoryManager />} />
                     <Route path="/admin/category/edit/:categoryId" element={<EditCategoryPage />} />
+                    <Route path="/admin/create-category" element={<CreateCategoryPage />} />
+                    <Route path="/admin/create-subcategory" element={<CreateSubcategoryPage />} />
+                    <Route path="/admin/edit-subcategory/:id" element={<EditSubcategoryPage />} />
 
-                    <Route path="/admin/product" element={<AdminPanel />} />
-                    <Route path="/admin/add-product" element={<AddProductPage />} />
-                    <Route path="/admin/add-category" element={<AddCategoryPage />} />
+                    {/*<Route path="/admin/product" element={<AdminPanel />} />*/}
+                    {/*<Route path="/admin/create-product" element={<AddProductPage />} />*/}
+
 
                 </Routes>
               </Layout>

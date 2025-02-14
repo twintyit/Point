@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../../../services/apiService.js';
+import { getAllCategories } from '../../../services/apiService.js';
 import SidebarCabinetButton from './sidebar-cabinet-button/SidebarCabinetButton';
 import { useModal } from '../../../contexts/ModalContext';
 import UserCart from '../../../pages/cart/Cart.jsx';
@@ -22,7 +22,7 @@ const Sidebar = ({ mode, isVisible }) => {
         }
         else if(mode === 'categories'){
             const fetchCategories = async () => {
-                const data = await getCategories();
+                const data = await getAllCategories();
                 setContent(data.data);
             };
 

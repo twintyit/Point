@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
-import {addCategory} from "../../../../services/apiService.js";
+import {createCategory} from "../../../../services/apiService.js";
 import alertService from "../../../../services/alertService.js";
-import './AddCategoryPage.css';
+import './CreateCategoryPage.css';
 
-const AddCategoryPage  = () => {
+const CreateCategoryPage  = () => {
     const {authState} = useAuth();
     const [title, setTitle] = useState("");
     const [slug, setSlug] = useState("");
@@ -19,7 +19,7 @@ const AddCategoryPage  = () => {
         }
 
         try {
-            addCategory(formData, authState.token);
+            await createCategory(formData, authState.token);
             alertService.success("Категория добавлена!");
         } catch (error) {
             alertService.error("Ошибка при добавлении категории");
@@ -79,4 +79,4 @@ const AddCategoryPage  = () => {
 };
 
 
-export default AddCategoryPage;
+export default CreateCategoryPage;

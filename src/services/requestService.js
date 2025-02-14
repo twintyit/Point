@@ -54,8 +54,6 @@ export default class RequestService {
                     ? await api.get(this.url, config)
                     : await api[this.method](this.url, preparedData, config);
 
-            console.log(response)
-
             return response.data;
         } catch (error) {
             throw error; // просто выбрасываем ошибку для дальнейшей обработки
