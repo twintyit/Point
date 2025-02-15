@@ -44,6 +44,19 @@ const EditSubcategoryPage = () => {
         fetchData();
     }, [id]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getCategoryById(id);
+                setSelectedCategory(data.id);
+            } catch (error) {
+                console.log(error)
+            }
+        };
+
+        fetchData();
+    }, [id]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();

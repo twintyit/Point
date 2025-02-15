@@ -54,6 +54,18 @@ class AlertService {
             }
         });
     }
+
+    static confirmRestore(message = "Вы уверены, что хотите восстановить?") {
+        return Swal.fire({
+            icon: "question",
+            title: "Подтвердите восстановление",
+            text: message,
+            showCancelButton: true,
+            confirmButtonText: "Да, восстановить",
+            cancelButtonText: "Отмена",
+            reverseButtons: true,
+        }).then((result) => result.isConfirmed);
+    }
 }
 
 export default AlertService;

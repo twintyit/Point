@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {
     deleteCategory,
-    getAllCategories,
+    getAllCategories, getAllSybCategories,
     getDeletedCategories,
-    getSubcategoryById
+    getSubcategoryById, restoreCategory
 } from "../../../../services/apiService.js";
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
 import {Link} from "react-router-dom";
@@ -22,6 +22,7 @@ const CategoryManager = () => {
             try {
                 const data = await getAllCategories();
                 setCategories(data);
+                await getAllSybCategories();
             }catch (error){
                 console.error(error)
             }
@@ -51,6 +52,19 @@ const CategoryManager = () => {
                 setDataDeleted(!dataDeleted);
             } catch (error) {
                 alertService.error("Ошибка при удалении категории");
+            }
+        }
+    }
+
+    const onRestoreCategoryButtonClick = async (id) => {
+        const shouldDelete = await alertService.confirmRestore("Вы уверены, что хотите восстановить выбранную категорию?");
+        if (shouldDelete) {
+            try {
+                await restoreCategory(id, authState.token);
+                alertService.success("Категория востановлена!");
+                setDataDeleted(!dataDeleted);
+            } catch (error) {
+                alertService.error("Ошибка при восстановлении категории");
             }
         }
     }
@@ -98,7 +112,7 @@ const CategoryManager = () => {
                                 <div className="col-6 d-flex">
                                     <button
                                         className="btn btn-primary me-2"
-                                        // onClick={() => onDeleteCategoryButtonClick(category.id)}
+                                         onClick={() => onRestoreCategoryButtonClick(category.id)}
                                     >
                                         Вернуть
                                     </button>

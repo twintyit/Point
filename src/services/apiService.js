@@ -1,4 +1,5 @@
 import RequestService from "./requestService.js";
+import data from "bootstrap/js/src/dom/data.js";
 
 export const signup = async (userData) => {
     return await new RequestService('post', '/auth/signup')
@@ -169,7 +170,14 @@ export const updateSubcategoryById = async (id, data, token) => {
 };
 
 export const getSubcategoriesByCategoryId = async (id) => {
-    return await new RequestService('get', `/prod/categories/${id}/subcategories`)
+    return await new RequestService('get', `/prod/subcategories/category/${id}`)
         .handleRequest();
 };
+
+export const restoreCategory = async (id, token) => {
+    return await new RequestService('put', `/prod/categories/restore/${id}`)
+        .setFormData(token)
+        .handleRequest();
+};
+
 
