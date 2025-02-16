@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllCategories } from '../../../services/apiService.js';
 import SidebarCabinetButton from './sidebar-cabinet-button/SidebarCabinetButton';
 import { useModal } from '../../../contexts/ModalContext';
 import UserCart from '../../../pages/cart/Cart.jsx';
 
 import './Sidebar.css';
+import {getAllCategories} from "../../../services/api/categoryService.js";
 
 const Sidebar = ({ mode, isVisible }) => {
     const [content, setContent] = useState([]);

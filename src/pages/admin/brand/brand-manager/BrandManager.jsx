@@ -1,19 +1,14 @@
 import React, {useEffect} from 'react';
-
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
 import {Link} from "react-router-dom";
 import alertService from "../../../../services/alertService.js";
-import {
-    deleteCategory,
-    getAllCategories,
-    getAllSubcategories,
-    getDeletedCategories, restoreCategory
-} from "../../../../services/api/categoryService.js";
+import "./BrandManager.css"
+import {deleteBrand, getAllBrands, getDeletedBrands, restoreBrand} from "../../../../services/api/brandService.js";
 
-const CategoryManager = () => {
+const BrandManager = () => {
 
-    const [categories, setCategories] = React.useState([]);
-    const [deletedCategories, setDeletedCategories] = React.useState([]);
+    const [brands, setBrands] = React.useState([]);
+    const [deletedBrands, setDeletedBrands] = React.useState([]);
 
     const [dataDeleted, setDataDeleted] = React.useState(false);
     const {authState} = useAuth();
@@ -21,9 +16,8 @@ const CategoryManager = () => {
     useEffect(() => {
         const res = async () => {
             try {
-                const data = await getAllCategories();
-                setCategories(data);
-                await getAllSubcategories();
+                const data = await getAllBrands();
+                setBrands(data);
             }catch (error){
                 console.error(error)
             }
@@ -34,8 +28,8 @@ const CategoryManager = () => {
     useEffect(() => {
         const res = async () => {
             try {
-                const data = await getDeletedCategories();
-                setDeletedCategories(data);
+                const data = await getDeletedBrands();
+                setDeletedBrands(data);
             }catch (error){
                 console.error(error)
             }
@@ -44,28 +38,28 @@ const CategoryManager = () => {
     },[dataDeleted]);
 
 
-    const onDeleteCategoryButtonClick = async (id) => {
+    const onDeleteBrandButtonClick = async (id) => {
         const shouldDelete = await alertService.confirmDelete();
         if (shouldDelete) {
             try {
-                await deleteCategory(authState.token, id);
-                alertService.success("Категория удалена!");
+                await deleteBrand(id, authState.token,);
+                alertService.success("Бренд удален!");
                 setDataDeleted(!dataDeleted);
             } catch (error) {
-                alertService.error("Ошибка при удалении категории");
+                alertService.error("Ошибка при удалении бренда");
             }
         }
     }
 
-    const onRestoreCategoryButtonClick = async (id) => {
-        const shouldDelete = await alertService.confirmRestore("Вы уверены, что хотите восстановить выбранную категорию?");
+    const onRestoreBrandButtonClick = async (id) => {
+        const shouldDelete = await alertService.confirmRestore("Вы уверены, что хотите восстановить выбранный бренд?");
         if (shouldDelete) {
             try {
-                await restoreCategory(id, authState.token);
-                alertService.success("Категория востановлена!");
+                await restoreBrand(id, authState.token);
+                alertService.success("Бренд востановлен!");
                 setDataDeleted(!dataDeleted);
             } catch (error) {
-                alertService.error("Ошибка при восстановлении категории");
+                alertService.error("Ошибка при восстановлении бренда");
             }
         }
     }
@@ -73,47 +67,49 @@ const CategoryManager = () => {
     return   <>
         <div>
             <div className="d-flex justify-content-center">
-                <Link className="btn btn-success" to={`/admin/create-category`}>Добавить категорию</Link>
-                <Link className="btn btn-success" to={`/admin/create-subcategory`}>Добавить подкатегорию</Link>
-
+                <Link className="btn btn-success" to={`/admin/brand/create`}>Добавить бренд</Link>
             </div>
-            {categories.length > 0 && (
+            {brands.length > 0 && (
                 <div className="d-flex flex-column">
                     <div className="d-flex border-bottom p-2 fw-bold">
-                        <div className="col-6">Название категории</div>
+                        <div className="col-6">Название бренда</div>
                         <div className="col-6">Действия</div>
                     </div>
-                    {categories.map((category, index) => (
+                    {brands.map((item, index) => (
                         <div key={index} className="d-flex border-bottom p-2 align-items-center">
-                            <div className="col-6">{category.title}</div>
+                            <div className="col-6 d-flex align-items-center">
+                                <div className="me-3 brand-img-container">
+                                    <img src={item.imgUrl} alt={item.title} className="brand-img"/>
+                                </div>
+                                <span>{item.title}</span>
+                            </div>
                             <div className="col-6 d-flex">
-                                <button
-                                    className="btn btn-danger me-2"
-                                    onClick={()=>onDeleteCategoryButtonClick(category.id)}
-                                >
+                                <button className="btn btn-danger me-2" onClick={() => onDeleteBrandButtonClick(item.id)}>
                                     Удалить
                                 </button>
-                                <Link className="btn btn-warning" to={`/admin/category/edit/${category.id}`}>Редактировать</Link>
+                                <Link className="btn btn-warning" to={`/admin/brand/edit/${item.id}`}>
+                                    Редактировать
+                                </Link>
                             </div>
                         </div>
                     ))}
                 </div>
             )}
-            {deletedCategories.length > 0 && (
+            {deletedBrands.length > 0 && (
                 <div>
-                    <h3>Удаленные категории</h3>
+                    <h3>Удаленные бренды</h3>
                     <div className="d-flex flex-column">
                         <div className="d-flex border-bottom p-2 fw-bold">
-                            <div className="col-6">Название категории</div>
+                            <div className="col-6">Название бренда</div>
                             <div className="col-6">Действия</div>
                         </div>
-                        {deletedCategories.map((category, index) => (
+                        {deletedBrands.map((category, index) => (
                             <div key={index} className="d-flex border-bottom p-2 align-items-center">
                                 <div className="col-6">{category.title}</div>
                                 <div className="col-6 d-flex">
                                     <button
                                         className="btn btn-primary me-2"
-                                         onClick={() => onRestoreCategoryButtonClick(category.id)}
+                                        onClick={() => onRestoreBrandButtonClick(category.id)}
                                     >
                                         Вернуть
                                     </button>
@@ -129,4 +125,4 @@ const CategoryManager = () => {
     </>
 }
 
-export default CategoryManager;
+export default BrandManager;

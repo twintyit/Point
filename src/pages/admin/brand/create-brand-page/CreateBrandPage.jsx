@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
 import alertService from "../../../../services/alertService.js";
-import './CreateCategoryPage.css';
-import {createCategory} from "../../../../services/api/categoryService.js";
+import './CreateBrandPage.css';
+import {createBrand} from "../../../../services/api/brandService.js";
 
-const CreateCategoryPage  = () => {
+const CreateBrandPage  = () => {
     const {authState} = useAuth();
     const [title, setTitle] = useState("");
     const [slug, setSlug] = useState("");
     const [image, setImage] = useState([]);
 
-    async function submitCategory() {
+    async function submitBrand() {
         const formData = new FormData();
         formData.append("Title", title);
         formData.append("Slug", slug || title);
@@ -19,10 +19,10 @@ const CreateCategoryPage  = () => {
         }
 
         try {
-            await createCategory(formData, authState.token);
-            alertService.success("Категория добавлена!");
+            await createBrand(formData, authState.token);
+            alertService.success("Бренд добавлен!");
         } catch (error) {
-            alertService.error("Ошибка при добавлении категории");
+            alertService.error("Ошибка при добавлении бренда");
         }
     }
 
@@ -34,11 +34,11 @@ const CreateCategoryPage  = () => {
             encType="multipart/form-data"
             onSubmit={(e) => {
                 e.preventDefault();
-                submitCategory();
+                submitBrand();
             }}
         >
             <div className="form-group">
-                <label htmlFor="title">Название категории:</label>
+                <label htmlFor="title">Название бренда:</label>
                 <input
                     type="text"
                     className="form-control"
@@ -73,10 +73,10 @@ const CreateCategoryPage  = () => {
                 />
             </div>
 
-            <button type="submit" className="btn btn-primary mt-3">Создать категорию</button>
+            <button type="submit" className="btn btn-primary mt-3">Создать бренд</button>
         </form>
     );
 };
 
 
-export default CreateCategoryPage;
+export default CreateBrandPage;

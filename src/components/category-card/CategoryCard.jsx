@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import "./CategoryCard.css"
 import {Link} from "react-router-dom";
+import "./CategoryCard.css"
 
 const CategoryCard = ({ category }) => {
 

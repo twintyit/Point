@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {Link, useParams} from "react-router-dom";
-import {
-    updateCategory,
-    getCategoryById,
-    getSubcategoriesByCategoryId,
-    deleteSubcategoryById
-} from "../../../../services/apiService.js";
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
 import alertService from "../../../../services/alertService.js";
+import {
+    deleteSubcategoryById,
+    getCategoryById,
+    getSubcategoriesByCategoryId,
+    updateCategory
+} from "../../../../services/api/categoryService.js";
 
 const EditCategoryPage = () => {
     const { categoryId } = useParams();

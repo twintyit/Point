@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import {
-    updateCategory,
-    getCategoryById,
-    getSubcategoriesByCategoryId,
-    deleteSubcategoryById, getSubcategoryById, getAllCategories, updateSubcategoryById
-} from "../../../../services/apiService.js";
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
 import alertService from "../../../../services/alertService.js";
 import "./EditSubcategoryPage.css"
+import {
+    getAllCategories,
+    getCategoryById,
+    getSubcategoryById,
+    updateSubcategoryById
+} from "../../../../services/api/categoryService.js";
 
 const EditSubcategoryPage = () => {
     const { id } = useParams();
@@ -44,18 +44,18 @@ const EditSubcategoryPage = () => {
         fetchData();
     }, [id]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getCategoryById(id);
-                setSelectedCategory(data.id);
-            } catch (error) {
-                console.log(error)
-            }
-        };
-
-        fetchData();
-    }, [id]);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const data = await getCategoryById(id);
+    //             setSelectedCategory(data.id);
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     };
+    //
+    //     fetchData();
+    // }, [id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Carousel from '../../components/carousel/Carousel';
-import ProductList from '../../components/product-list/ProductList.jsx';
 import './HomePage.css';
 import Section from "../../components/section/Section.jsx";
 import CategoryShowcase from "../../components/category-showcase/CategoryShowcase.jsx";

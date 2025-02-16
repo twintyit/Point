@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getCategoryProducts, getAllProducts } from '../../services/apiService.js';
+import {getAllProducts, searchProduct} from '../../services/api/productService.js';
 import ProductCard from '../product-card/ProductCard.jsx';
 import { useCart } from '../../contexts/CartContext.jsx';
-import { searchProduct } from '../../services/apiService.js';
+import {getCategoryById} from "../../services/api/categoryService.js";
 import "./ProductList.css"
 
 const ProductList = ({ categoryId, searchedProduct }) => {
@@ -14,7 +14,7 @@ const ProductList = ({ categoryId, searchedProduct }) => {
             try {
                 let response;
                 if (categoryId) {
-                    response = await getCategoryProducts(categoryId);
+                    response = await getCategoryById(categoryId);
                 } else if (searchedProduct){
                     response = await searchProduct(searchedProduct);
                 } 

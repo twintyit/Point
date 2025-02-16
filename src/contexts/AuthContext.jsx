@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useEffect, useReducer} from 'react';
-import { login, logout } from '../services/apiService.js';
 import { useNavigate } from 'react-router-dom';
 import {authReducer, initialState} from "../reducer/AuthReducer.jsx";
+import {login, logout} from "../services/api/authService.js";
 
 const AuthContext = createContext();
 

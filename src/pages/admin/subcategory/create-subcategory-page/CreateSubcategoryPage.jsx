@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useAuth} from "../../../../contexts/AuthContext.jsx";
-import {createCategory, createSubcategory, getAllCategories} from "../../../../services/apiService.js";
 import alertService from "../../../../services/alertService.js";
 import './CreateSubcategoryPage.css';
+import {createSubcategory, getAllCategories} from "../../../../services/api/categoryService.js";
 
 const CreateSubcategoryPage  = () => {
     const {authState} = useAuth();

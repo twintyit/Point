@@ -2,8 +2,6 @@
 import React, {useEffect, useState} from 'react';
 import {useCart} from "../../contexts/CartContext.jsx";
 import './CheckoutPage.css';
-import {Link} from "react-router-dom";
-import {confirmOrder} from "../../services/apiService.js";
 import {useAuth} from "../../contexts/AuthContext.jsx";
 import LoginPage from "../auth/login-page/LoginPage.jsx"; // Подключаем стили
 

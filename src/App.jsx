@@ -23,6 +23,9 @@ import CategoryManager from "./pages/admin/category/category-manager/CategoryMan
 import EditCategoryPage from "./pages/admin/category/edit-category-page/EditCategoryPage.jsx";
 import CreateSubcategoryPage from "./pages/admin/subcategory/create-subcategory-page/CreateSubcategoryPage.jsx";
 import EditSubcategoryPage from "./pages/admin/subcategory/edit-subcategory-page/EditSubcategoryPage.jsx";
+import CreateBrandPage from "./pages/admin/brand/create-brand-page/CreateBrandPage.jsx";
+import BrandManager from "./pages/admin/brand/brand-manager/BrandManager.jsx";
+import EditBrandPage from "./pages/admin/brand/edit-brand-page/EditBrandPage.jsx";
 
 function App() {
   
@@ -50,6 +53,11 @@ function App() {
                     <Route path="/admin/create-category" element={<CreateCategoryPage />} />
                     <Route path="/admin/create-subcategory" element={<CreateSubcategoryPage />} />
                     <Route path="/admin/edit-subcategory/:id" element={<EditSubcategoryPage />} />
+
+                    <Route path="/admin/brand" element={<BrandManager />} />
+                    <Route path="/admin/brand/create" element={<CreateBrandPage />} />
+                    <Route path="/admin/brand/edit/:id" element={<EditBrandPage />} />
+
 
                     {/*<Route path="/admin/product" element={<AdminPanel />} />*/}
                     {/*<Route path="/admin/create-product" element={<AddProductPage />} />*/}

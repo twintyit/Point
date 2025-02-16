@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getSaleImages } from '../../services/apiService.js';
 import './Carousel.css'
+import {getSaleImages} from "../../services/api/productService.js";
 
 const Carousel = () => {
     const [images, setImages] = useState([]);

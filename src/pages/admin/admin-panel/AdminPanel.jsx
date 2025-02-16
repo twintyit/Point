@@ -11,10 +11,9 @@ const AdminPanel = () => {
                 </button>
                 <button className="btn btn-primary" onClick={() => navigate('/admin/product')}>Продукты
                 </button>
+                <button className="btn btn-success" onClick={() => navigate('/admin/brand')}>Бренды
+                </button>
 
-
-                {/*<button className="btn btn-success" onClick={() => navigate('/admin/add-product')}>Добавить товар*/}
-                {/*</button>*/}
                 {/*<button className="btn btn-success" onClick={() => navigate('/admin/add-category')}>Добавить категорию*/}
                 {/*</button>*/}
                 {/*<button className="btn btn-danger" onClick={() => navigate('/admin/delete-product')}>Удалить товар*/}
